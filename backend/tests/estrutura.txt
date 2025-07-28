@@ -1,0 +1,30 @@
+/
+├── .github
+│   └── workflows
+│       └── gerar_estrutura.yml
+├── backend
+│   ├── a.txt
+│   └── tests
+│       ├── a.txt
+│       ├── estrutura.txt
+│       └── gerar_estrutura.py
+├── data
+│   └── a.txt
+├── frontend-admin
+│   ├── assets
+│   │   └── a.txt
+│   ├── css
+│   │   └── a.txt
+│   └── js
+│       └── a.txt
+├── frontend-public
+│   ├── assets
+│   │   └── a.txt
+│   ├── css
+│   │   └── a.txt
+│   └── js
+│       └── a.txt
+├── odoo-module
+│   └── a.txt
+└── tests
+    └── a.txt
