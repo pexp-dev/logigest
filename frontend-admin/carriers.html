@@ -1,1 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestão de Transportadores</title>
+  <link rel="stylesheet" href="css/carriers.css">
+</head>
+<body>
+  <div class="layout">
+    <header>
+      <h2>Transportadores</h2>
+      <button onclick="addCarrier()">Novo Transportador</button>
+      <button onclick="downloadCarrierJson()">Descarregar JSON</button>
+      <span id="msg" class="msg"></span>
+    </header>
+
+    <main>
+      <table id="carriers-table">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Código</th>
+            <th>Morada</th>
+            <th>Email</th>
+            <th>Telefone</th>
+            <th>Tabelas de Preço</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="carriers-body">
+          <!-- Linhas geradas via JS -->
+        </tbody>
+      </table>
+    </main>
+  </div>
+
+  <script src="js/carriers.js"></script>
+</body>
+</html>
 
