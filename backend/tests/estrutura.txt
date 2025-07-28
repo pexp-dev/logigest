@@ -3,6 +3,12 @@
 │   └── workflows
 │       └── gerar_estrutura.yml
 ├── backend
+│   ├── crud.py
+│   ├── database.py
+│   ├── main.py
+│   ├── models.py
+│   ├── schemas.py
+│   ├── services.py
 │   └── tests
 │       ├── estrutura.txt
 │       └── gerar_estrutura.py
@@ -10,19 +16,41 @@
 │   └── a.txt
 ├── frontend-admin
 │   ├── assets
-│   │   └── a.txt
+│   │   ├── Albania.svg
+│   │   ├── Alemanha.svg
+│   │   ├── Austria.svg
+│   │   ├── Belgica.svg
+│   │   ├── Chequia.svg
+│   │   ├── Dinamarca.svg
+│   │   ├── Espanha.svg
+│   │   ├── França.svg
+│   │   ├── Italia.svg
+│   │   ├── Paises Baixos.svg
+│   │   ├── Portugal.svg
+│   │   ├── Reino Unido.svg
+│   │   ├── Suecia.svg
+│   │   ├── Suiça.svg
+│   │   └── europamain.svg
+│   ├── carriers.html
 │   ├── css
 │   │   └── a.txt
-│   └── js
-│       └── a.txt
+│   ├── index.html
+│   ├── js
+│   │   └── a.txt
+│   ├── price-tables.html
+│   └── rules.html
 ├── frontend-public
 │   ├── assets
 │   │   └── a.txt
 │   ├── css
 │   │   └── a.txt
-│   └── js
-│       └── a.txt
+│   ├── index.html
+│   ├── js
+│   │   └── a.txt
+│   ├── request-quote.html
+│   └── simulate.html
 ├── odoo-module
+│   └── README.md
+├── tests
 │   └── a.txt
-└── tests
-    └── a.txt
+└── to do list .txt
