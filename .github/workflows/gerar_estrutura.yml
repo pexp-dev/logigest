@@ -19,10 +19,10 @@ jobs:
           python-version: '3.10'
 
       - name: Executar gerar_estrutura.py
-        run: python arquivo/gerar_estrutura.py
+        run: python backend/tests/gerar_estrutura.py
 
       - name: Mostrar estrutura gerada
-        run: cat arquivo/estrutura.txt
+        run: cat backend/tests/estrutura.txt
 
       - name: Commit do estrutura.txt gerado
         run: |
@@ -30,7 +30,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
 
-          git add arquivo/estrutura.txt
+          git add backend/tests/estrutura.txt
           git diff --cached --quiet || git commit -m "Atualiza estrutura automática"
           git push
         env:
