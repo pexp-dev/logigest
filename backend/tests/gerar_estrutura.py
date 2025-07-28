@@ -1,6 +1,6 @@
 import os
 
-def gerar_estrutura_arvore(base_dir='.', output_file='arquivo/estrutura.txt'):
+def gerar_estrutura_arvore(base_dir='.', output_file='backend/tests/estrutura.txt'):
     ignore_dirs = {'.git', '__pycache__', 'node_modules'}
     
     def montar_arvore(caminho, prefixo=''):
