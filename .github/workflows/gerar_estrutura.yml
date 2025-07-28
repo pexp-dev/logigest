@@ -1,0 +1,37 @@
+name: Gerar Estrutura
+
+on:
+  workflow_dispatch:  # permite correr manualmente
+
+jobs:
+  gerar_estrutura:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false  # necessário para o commit manual
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Executar gerar_estrutura.py
+        run: python arquivo/gerar_estrutura.py
+
+      - name: Mostrar estrutura gerada
+        run: cat arquivo/estrutura.txt
+
+      - name: Commit do estrutura.txt gerado
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+
+          git add arquivo/estrutura.txt
+          git diff --cached --quiet || git commit -m "Atualiza estrutura automática"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
