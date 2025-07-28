@@ -3,9 +3,7 @@
 │   └── workflows
 │       └── gerar_estrutura.yml
 ├── backend
-│   ├── a.txt
 │   └── tests
-│       ├── a.txt
 │       ├── estrutura.txt
 │       └── gerar_estrutura.py
 ├── data
