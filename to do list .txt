@@ -1,0 +1,222 @@
+Markdown
+
+# [Nome do Projeto - Sugestão: LogiQuote API | TransCalc API | FreightFlow Pro]
+
+## Visão Geral do Projeto
+
+Este projeto consiste no desenvolvimento de uma **plataforma web modular** para **cálculo de custos logísticos e gestão de orçamentos**. A arquitetura é desenhada em fases, começando com uma solução robusta e independente, pronta para uma futura integração como módulo nativo do Odoo.
+
+A aplicação inclui:
+* Um **Frontend Público** para clientes simularem envios e solicitarem cotações.
+* Um **Frontend Administrativo (Back Office)** para a manutenção de transportadores, tabelas de preços e regras de cálculo.
+* Um **Backend** com uma API RESTful (FastAPI) responsável pela lógica de cálculo de custos, gestão de dados (persistidos em SQLite na Fase 1) e comunicação entre as interfaces.
+
+A **modularidade** é um princípio-chave, garantindo que a estrutura seja compatível com a integração futura no Odoo, minimizando o retrabalho ao fazer a transição.
+
+## Funcionalidades Atuais (Fase 1: MVP Local com Backend Dedicado)
+
+Nesta fase, o foco é construir uma solução autônoma e funcional, com um backend robusto em Python (FastAPI) e persistência de dados em SQLite.
+
+### 1. Simulação de Envios (Calculadora)
+
+* **Inputs:** O utilizador pode especificar a origem/destino (país, código de destino), tipo de embalagem, dimensões (comprimento, largura, altura) e peso.
+* **Cálculo:** O frontend envia estes dados para a API do Backend (FastAPI), que realiza o cálculo do custo de transporte com base nas tabelas de preços e regras configuradas (geridas via Back Office e armazenadas em SQLite).
+* **Saída:** Apresentação clara do valor estimado do transporte e, potencialmente, das opções de transportadores que atendem aos critérios.
+
+### 2. Pedido de Orçamento
+
+* **Formulário Detalhado:** Permite ao utilizador descrever necessidades de transporte mais complexas ou não padronizadas.
+* **Dados de Contacto:** Recolha de informações do cliente para futura resposta.
+* **Submissão:** O frontend envia o pedido para a API do Backend, que o armazena em SQLite para análise manual ou posterior processamento.
+
+### 3. Back Office (Gestão Administrativa)
+
+* Interface baseada em HTML/JavaScript que interage com a API do Backend para a gestão de dados.
+* **Gestão de Transportadores:** Funcionalidades CRUD (Criar, Ler, Atualizar, Eliminar) para informações de transportadores.
+* **Gestão de Tabelas de Preços:** Manutenção de tabelas de preços associadas a diferentes transportadores, rotas, tipos de embalagem e faixas de peso/volume.
+* **Gestão de Regras:** Definição e ajuste de regras de cálculo (ex: peso cubado, mínimos/máximos, exceções por rota/tipo de serviço).
+
+## Funcionalidades Futuras (Fase 2: Integração com Odoo)
+
+A segunda fase prevê a transição da gestão de dados e da lógica de negócio principal para um módulo Odoo, posicionando o Odoo como o sistema central de gestão.
+
+### 1. Odoo como Base de Dados e Lógica de Negócio
+
+* **Migração de Dados:** Os dados de transportadores, tabelas de preços e regras serão migrados do SQLite para o banco de dados do Odoo.
+* **Gestão N ativa no Odoo:** Todas as operações de CRUD e manutenção dos dados passarão a ser realizadas diretamente na interface administrativa do Odoo, utilizando um módulo personalizado.
+* **Cálculo Centralizado:** A lógica de cálculo de custos mais complexa e as regras de negócio serão implementadas dentro do módulo Odoo, aproveitando seu framework e escalabilidade.
+
+### 2. APIs de Comunicação Odoo-Frontend
+
+* O módulo Odoo exporá **APIs RESTful** para que o frontend externo possa:
+    * Consultar dados mestres (países, transportadores, tipos de serviço).
+    * Enviar parâmetros de cálculo e receber o custo final processado pelo Odoo.
+    * Submeter pedidos de orçamento, que serão criados como registos no Odoo para acompanhamento e gestão.
+
+### 3. Workflow de Orçamentos Odoo
+
+* O Odoo gerenciará o ciclo completo dos pedidos de orçamento: recebimento, atribuição a equipas, comunicação com fornecedores, acompanhamento de respostas e geração de propostas ao cliente, integrando-se com os módulos de CRM/Vendas do Odoo.
+
+## Estrutura do Repositório
+
+logigest/
+├── frontend-public/         # Interfaces públicas (clientes: calculadora, pedido de orçamento)
+│   ├── index.html           # Página inicial com as duas opções
+│   ├── simulate.html        # Calculadora de envios
+│   ├── request-quote.html   # Formulário de pedido de orçamento
+│   ├── css/
+│   ├── js/                  # JS de frontend público, consome a API backend
+│   └── assets/              # Imagens, SVGs, etc.
+├── frontend-admin/          # Back Office simples (administração, gestão de dados)
+│   ├── index.html           # Painel principal do admin
+│   ├── carriers.html        # Gestão de transportadores
+│   ├── price-tables.html    # Gestão de tabelas de preços
+│   ├── rules.html           # Gestão de regras
+│   ├── css/
+│   ├── js/                  # JS de frontend admin, consome a API backend
+│   └── assets/
+├── backend/                 # API REST (Python com FastAPI)
+│   ├── main.py              # Aplicação FastAPI principal
+│   ├── models.py            # Definições de modelos de dados (SQLAlchemy para SQLite)
+│   ├── schemas.py           # Pydantic schemas para validação de dados
+│   ├── crud.py              # Funções CRUD para interagir com o DB
+│   ├── services.py          # Lógica de negócio (cálculo de transporte)
+│   ├── database.py          # Configuração de conexão com SQLite
+│   └── tests/               # Testes para o backend
+├── data/                    # Dados iniciais para popular o DB SQLite (JSONs ou scripts)
+│   ├── countries.json
+│   ├── initial_carriers.json
+│   └── initial_price_tables.json
+├── odoo-module/             # Placeholder para futura integração com Odoo (vazio inicialmente)
+│   └── README.md            # Documentação sobre a futura estrutura do módulo Odoo
+├── tests/                   # Testes automatizados (gerais, de integração)
+├── .github/                 # GitHub Actions para CI/CD
+│   └── workflows/
+│       └── main.yml
+├── README.md                # Este ficheiro
+├── .gitignore               # Ficheiros e diretórios a serem ignorados pelo Git
+└── requirements.txt         # Dependências do Python (para o backend)
+
+
+## Como Começar (Fase 1: Desenvolvimento Local)
+
+1.  **Pré-requisitos:** Python 3.8+, pip.
+2.  **Clonar o Repositório:**
+    ```bash
+    git clone [URL_DO_SEU_REPOSITORIO]
+    cd logigest
+    ```
+3.  **Configurar e Iniciar o Backend:**
+    ```bash
+    cd backend
+    pip install -r requirements.txt # Instalar FastAPI, SQLAlchemy, Uvicorn, etc.
+    uvicorn main:app --reload      # Iniciar o servidor FastAPI
+    ```
+    (A API estará disponível em `http://localhost:8000`)
+4.  **Aceder às Interfaces Web:**
+    * No seu navegador, abra os ficheiros HTML diretamente (ex: `file:///path/to/logigest/frontend-public/index.html`).
+    * **Nota:** Para que as requisições AJAX do frontend funcionem corretamente (devido a restrições de CORS), o ideal é servir os ficheiros do frontend através de um servidor HTTP. O próprio FastAPI pode fazer isso, configurando `app.mount("/static", StaticFiles(directory="frontend-public"), name="static")` no seu `main.py` e acedendo via `http://localhost:8000/static/index.html`.
+
+5.  **Preencher Dados Iniciais:**
+    * Inicialmente, o backend pode ler dos JSONs em `data/` para popular o SQLite na primeira execução, ou use as interfaces do Back Office (`frontend-admin/`) para inserir dados via API.
+
+## Plano de Trabalho Detalhado
+
+Este plano detalha as etapas para o desenvolvimento do projeto, dividido em fases e sprints.
+
+### Fase 1: MVP Local (GitHub + FastAPI/SQLite) - **Foco Atual**
+
+**Objetivo:** Criar uma base funcional e robusta com frontend, backend API e back office para gestão de dados, preparando para a integração futura.
+
+**Sprint 1: Setup e API Básica (2-3 Semanas)**
+
+* **Setup do Repositório:**
+    * Criar o repositório GitHub com a estrutura de pastas proposta.
+    * Configurar `.gitignore`, `LICENSE`, e o `README.md` detalhado.
+* **Backend FastAPI:**
+    * Configurar `main.py` para um aplicativo FastAPI básico.
+    * Configurar `database.py` para conexão com SQLite.
+    * Definir modelos de dados iniciais (`models.py`) e schemas (`schemas.py`) para **Transportadores**.
+    * Implementar funções CRUD (`crud.py`) e rotas API (`main.py`) para **Transportadores**.
+    * Servir ficheiros estáticos do `frontend-public/` e `frontend-admin/` via FastAPI.
+* **Frontend Público (`index.html`):**
+    * Criar `index.html` com links para "Simular Envio" e "Pedir Orçamento".
+* **Dados Iniciais:**
+    * Criar `data/countries.json` e `data/initial_carriers.json` para seeding inicial.
+
+**Sprint 2: Lógica de Cálculo e Frontend Público Completo (2-3 Semanas)**
+
+* **Modelagem de Dados Backend:**
+    * Expandir `models.py` e `schemas.py` para **Tabelas de Preços** e **Regras de Cálculo**.
+    * Implementar CRUD para Tabelas de Preços e Regras.
+* **Lógica de Cálculo (`backend/services.py`):**
+    * Desenvolver a lógica central para o cálculo de custos de transporte, considerando origem/destino, dimensões, peso, tipo de embalagem, e aplicando regras e tabelas de preços.
+    * Criar um endpoint API no FastAPI para `POST /calculate-cost`.
+* **Interface da Calculadora (`frontend-public/simulate.html`):**
+    * Desenhar o layout HTML com todos os campos de input.
+    * Desenvolver JavaScript para interagir com a API `calculate-cost` do FastAPI.
+    * Implementar validações no frontend (`frontend-public/js/`).
+* **Interface de Pedido de Orçamento (`frontend-public/request-quote.html`):**
+    * Criar o formulário de pedido de orçamento.
+    * Desenvolver JavaScript para enviar os dados para a API `POST /requests` no FastAPI.
+* **Testes:**
+    * Escrever testes unitários para a lógica de cálculo em `backend/tests/`.
+    * Escrever testes de integração para os endpoints da API.
+
+**Sprint 3: Back Office e Refinamentos (2-3 Semanas)**
+
+* **Back Office (Frontend Administrativo):**
+    * Desenvolver o `frontend-admin/index.html` como painel de navegação.
+    * Criar `frontend-admin/carriers.html` com tabelas e formulários para gestão completa de transportadores (CRUD via API).
+    * Criar `frontend-admin/price-tables.html` e `frontend-admin/rules.html` para gestão de tabelas de preços e regras (CRUD via API).
+    * Desenvolver o JavaScript correspondente em `frontend-admin/js/` para interagir com as APIs do backend.
+* **Documentação da API:**
+    * Utilizar a documentação automática do FastAPI (Swagger UI/ReDoc) e complementá-la no `README.md`.
+* **CI/CD:**
+    * Configurar GitHub Actions (`.github/workflows/main.yml`) para testes automáticos e, opcionalmente, deploy.
+
+### Fase 2: Integração com Odoo - **Foco Futuro**
+
+**Objetivo:** Migrar a gestão de dados e a lógica de negócio principal para um módulo Odoo, mantendo o frontend externo via APIs.
+
+**Sprint 4: Modelagem de Dados e Interface no Odoo (3-4 Semanas)**
+
+* **Setup Odoo:**
+    * Instalar Odoo e preparar ambiente de desenvolvimento.
+    * Inicializar o esqueleto do módulo Odoo em `odoo-module/`.
+* **Modelagem de Dados:**
+    * Traduzir os modelos de dados (Transportadores, Tabelas de Preços, Regras, Pedidos de Cotação) do SQLite/FastAPI para o ORM do Odoo (`odoo-module/models/`).
+    * Criar as vistas de formulário e tree view no Odoo (`odoo-module/views/`) para permitir a gestão nativa desses dados.
+* **Migração de Dados:**
+    * Desenvolver um script de migração (ou usar o importador do Odoo) para transferir dados existentes do SQLite para o banco de dados do Odoo.
+
+**Sprint 5: Criação de APIs RESTful no Odoo e Conexão Frontend (3-4 Semanas)**
+
+* **Controladores API Odoo:**
+    * No módulo Odoo, criar **controladores HTTP** (`odoo-module/controllers/`) que exponham APIs RESTful equivalentes às do FastAPI, para:
+        * Obter listas de transportadores, países, tipos de serviço.
+        * Receber parâmetros de cálculo e retornar o custo (lógica de cálculo já migrada para o Odoo).
+        * Receber novos pedidos de orçamento.
+* **Adaptação do Frontend:**
+    * Modificar o JavaScript em `frontend-public/js/data-access/` para que todas as chamadas de dados e cálculo apontem para as **novas APIs do Odoo**.
+    * Remover ou desativar o backend FastAPI e a pasta `data/`.
+    * O frontend administrativo (`frontend-admin/`) também seria **descontinuado**, pois a gestão passaria a ser feita diretamente no Odoo.
+
+**Sprint 6: Workflow de Orçamentos e Refinamentos Finais (3-4 Semanas)**
+
+* **Fluxo de Trabalho de Cotações Odoo:**
+    * Configurar e otimizar o fluxo de trabalho para os pedidos de orçamento dentro do Odoo (ex: integração com CRM, automatização de e-mails, criação de oportunidades de venda).
+    * Implementar regras de atribuição de transportadores com base nos dados do pedido.
+* **Lógica de Cálculo Odoo:**
+    * Garantir que toda a lógica de cálculo de custos complexa esteja robustamente implementada e testada no módulo Odoo.
+* **Testes de Integração:**
+    * Realizar testes extensivos de ponta a ponta para garantir a comunicação fluida entre o frontend e o Odoo.
+* **Documentação Final:**
+    * Atualizar o `README.md` com as informações da versão Odoo.
+    * Documentar o módulo Odoo internamente.
+
+---
+
+Este plano é **muito sólido** e fornece um caminho claro e escalável para o seu projeto. A divisão de fases e sprints, juntamente com a escolha de tecnologias como FastAPI e SQLite para a fase inicial, é estratégica e facilitará muito o processo de desenvolvimento e a transição para o Odoo.
+
+Você tem mais alguma questão ou algum ponto que queira discutir mais a fundo?
