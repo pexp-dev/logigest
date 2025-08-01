@@ -1,0 +1,266 @@
+/* frontend-admin/css/admin.css */
+
+/* Estilos gerais para todo o documento */
+html, body {
+    height: 100%; /* Garante que o html e o body ocupam 100% da altura da viewport */
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fonte moderna e limpa */
+    color: #333; /* Cor de texto padrão */
+    background-color: #f4f7f6; /* Cor de fundo suave para o corpo */
+    font-size: 15px; /* Tamanho de fonte base para consistência */
+}
+
+/* Layout principal da aplicação */
+.main-layout {
+    display: flex;
+    flex-direction: column; /* Organiza os elementos verticalmente */
+    min-height: 100vh; /* Garante que o layout ocupa pelo menos a altura total da viewport */
+    box-sizing: border-box; /* Inclui padding e border no cálculo da largura/altura */
+}
+
+/* Estilos do cabeçalho da administração */
+.admin-header {
+    flex-shrink: 0; /* Impede que o cabeçalho encolha */
+    background: #fafbfc; /* Fundo claro para o cabeçalho */
+    padding: 12px 20px 6px 20px; /* Preenchimento interno */
+    border-bottom: 1px solid #e0e0e0; /* Linha divisória inferior */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Sombra suave */
+    display: flex;
+    justify-content: space-between; /* Alinha o título à esquerda e a navegação à direita */
+    align-items: center; /* Centraliza verticalmente os itens */
+    flex-wrap: wrap; /* Permite quebra de linha em telas pequenas */
+    z-index: 10; /* Garante que o cabeçalho fica por cima de outros elementos */
+}
+
+.admin-header h1 {
+    margin: 0; /* Remove margens padrão do h1 */
+    font-size: 22px; /* Tamanho do título */
+    color: #333;
+}
+
+/* Estilos da navegação no cabeçalho */
+.admin-nav {
+    display: flex;
+    gap: 12px; /* Espaçamento entre os links */
+    flex-wrap: wrap; /* Permite quebra de linha para os links */
+}
+
+.admin-nav a {
+    text-decoration: none; /* Remove sublinhado padrão */
+    color: #007bff; /* Cor azul para os links */
+    font-weight: bold; /* Texto em negrito */
+    font-size: 0.95em; /* Tamanho da fonte ligeiramente menor que o padrão */
+    padding: 5px 8px; /* Pequeno padding para área de clique */
+    border-radius: 4px; /* Cantos ligeiramente arredondados */
+    transition: background-color 0.2s, color 0.2s; /* Transição suave para hover */
+}
+
+.admin-nav a:hover {
+    color: #0056b3; /* Cor azul mais escura no hover */
+    background-color: #e9f5ff; /* Fundo suave no hover */
+}
+
+/* Área de conteúdo principal (abaixo do cabeçalho) */
+.admin-content {
+    flex: 1 1 auto; /* Ocupa o espaço restante e permite encolher */
+    display: flex;
+    flex-direction: column; /* Organiza as secções verticalmente */
+    padding: 18px; /* Preenchimento interno */
+    gap: 18px; /* Espaçamento entre as secções */
+}
+
+/* Estilos comuns para secções (cards) */
+section {
+    background: #fff; /* Fundo branco para as secções */
+    padding: 18px; /* Preenchimento interno */
+    border-radius: 8px; /* Cantos arredondados */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* Sombra suave */
+}
+
+section h2 {
+    margin-top: 0;
+    color: #333;
+    font-size: 18px;
+    border-bottom: 1px solid #eee; /* Linha divisória */
+    padding-bottom: 8px;
+    margin-bottom: 18px;
+}
+
+/* Estilos para botões de ação genéricos */
+.action-button,
+button {
+    padding: 8px 15px;
+    border: 1px solid #007bff;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.95em;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.action-button:hover,
+button:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.action-button.primary {
+    background: #28a745; /* Verde para ações primárias */
+    border-color: #28a745;
+}
+
+.action-button.primary:hover {
+    background: #218838;
+    border-color: #218838;
+}
+
+.delete-btn,
+.remove-btn {
+    background-color: #dc3545; /* Vermelho para ações de eliminação */
+    border-color: #dc3545;
+}
+
+.delete-btn:hover,
+.remove-btn:hover {
+    background-color: #c82333;
+    border-color: #c82333;
+}
+
+.cancel-btn {
+    background-color: #6c757d; /* Cinzento para cancelar */
+    border-color: #6c757d;
+}
+
+.cancel-btn:hover {
+    background-color: #5a6268;
+    border-color: #5a6268;
+}
+
+/* Estilos para campos de formulário genéricos */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+    font-size: 0.95em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="url"],
+.form-group input[type="number"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.95em;
+    box-sizing: border-box; /* Garante que padding e border não aumentam a largura total */
+}
+
+.form-group input[readonly],
+.form-group select[readonly],
+.form-group textarea[readonly] {
+    background-color: #f5f5f5; /* Fundo cinza para campos de apenas leitura */
+    cursor: default;
+    pointer-events: none; /* Impede interação */
+}
+
+.form-group textarea {
+    resize: vertical; /* Permite redimensionamento vertical */
+    min-height: 80px;
+}
+
+/* Estilos para mensagens de feedback */
+.message {
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.message.info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+/* Classe utilitária para esconder elementos */
+.hidden {
+    display: none !important;
+}
+
+/* Estilos de responsividade */
+@media (max-width: 768px) {
+    .admin-header {
+        flex-direction: column; /* Empilha o título e a navegação */
+        align-items: flex-start;
+        padding: 10px 15px;
+        gap: 8px;
+    }
+
+    .admin-nav {
+        width: 100%;
+        justify-content: flex-start;
+        margin-top: 5px;
+    }
+
+    .admin-nav a {
+        padding: 3px 6px;
+        font-size: 0.9em;
+    }
+
+    .admin-content {
+        padding: 15px;
+        gap: 15px;
+    }
+
+    section {
+        padding: 15px;
+    }
+
+    section h2 {
+        font-size: 1.2em;
+        margin-bottom: 15px;
+    }
+
+    .action-button,
+    button {
+        padding: 7px 12px;
+        font-size: 0.9em;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 0.9em;
+        padding: 7px 8px;
+    }
+
+    .message {
+        font-size: 0.85em;
+        padding: 7px 12px;
+    }
+}

@@ -1,0 +1,280 @@
+/* Estilos específicos para a página de gestão de transportadores */
+
+.admin-header {
+    background: #f0f2f5;
+    padding: 15px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.admin-header h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.admin-nav a {
+    margin-left: 15px;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.admin-nav a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.admin-content {
+    display: flex;
+    flex-direction: row; /* Layout em colunas */
+    flex-grow: 1;
+    overflow: hidden; /* Para gerir o scroll interno */
+}
+
+.carrier-list-section, .carrier-detail-section {
+    padding: 20px;
+    overflow-y: auto; /* Permite scroll se o conteúdo for grande */
+    flex-shrink: 0;
+}
+
+.carrier-list-section {
+    flex-basis: 300px; /* Largura inicial da lista */
+    border-right: 1px solid #eee;
+    background: #fcfcfc;
+}
+
+.carrier-detail-section {
+    flex-grow: 1; /* Ocupa o espaço restante */
+    background: #fff;
+    position: relative; /* Para o botão de fechar */
+}
+
+.carrier-list-section h2, .carrier-detail-section h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #444;
+}
+
+.list-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.list-actions button, .list-actions input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.list-actions button {
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.list-actions button:hover {
+    background: #0056b3;
+}
+
+#searchCarrier {
+    flex-grow: 1;
+}
+
+.carrier-list {
+    border: 1px solid #eee;
+    border-radius: 4px;
+    max-height: calc(100vh - 200px); /* Ajustar conforme a altura do header/footer */
+    overflow-y: auto;
+    background: #fff;
+}
+
+.carrier-item {
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.carrier-item:last-child {
+    border-bottom: none;
+}
+
+.carrier-item:hover {
+    background: #f0f8ff;
+}
+
+.carrier-item.active {
+    background: #e0f0ff;
+    font-weight: bold;
+}
+
+.carrier-item strong {
+    display: block;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.carrier-item small {
+    color: #777;
+}
+
+/* Formulário de Detalhes */
+.carrier-detail-section h2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.carrier-detail-section .close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #888;
+    transition: color 0.2s;
+}
+
+.carrier-detail-section .close-btn:hover {
+    color: #333;
+}
+
+.carrier-form .form-group {
+    margin-bottom: 15px;
+}
+
+.carrier-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.carrier-form input[type="text"],
+.carrier-form input[type="email"],
+.carrier-form input[type="tel"],
+.carrier-form input[type="url"],
+.carrier-form textarea {
+    width: calc(100% - 22px); /* Ajusta o padding */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.form-inline {
+    display: flex;
+    gap: 15px;
+}
+
+.form-inline .form-group {
+    flex: 1;
+}
+
+.form-inline input {
+    width: auto;
+    flex-grow: 1;
+}
+
+.carrier-form textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.form-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.form-actions button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+#saveCarrierBtn {
+    background: #28a745;
+    color: white;
+}
+
+#saveCarrierBtn:hover {
+    background: #218838;
+}
+
+#deleteCarrierBtn {
+    background: #dc3545;
+    color: white;
+}
+
+#deleteCarrierBtn:hover {
+    background: #c82333;
+}
+
+.message {
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.message.success {
+    color: green;
+}
+
+.message.error {
+    color: red;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Estilos gerais para botões, etc. (se não estiverem em admin.css) */
+button {
+    cursor: pointer;
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Para o estilo admin.css que seria global */
+.main-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Estilos para o Logo */
+.logo-preview-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap; /* Para responsividade em telas pequenas */
+}
+
+.logo-preview {
+    max-width: 100px; /* Tamanho máximo para a pré-visualização */
+    max-height: 100px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    object-fit: contain; /* Garante que a imagem se ajusta sem cortar */
+    background-color: #f9f9f9; /* Fundo leve para logos transparentes */
+    padding: 5px;
+}
+
+.logo-preview.hidden {
+    display: none;
+}
