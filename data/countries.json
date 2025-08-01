@@ -1,0 +1,1484 @@
+[
+  {
+    "nome": "Afeganistão",
+    "iso": "AF",
+    "indicativo_telefone": "+93",
+    "regex_telefone": "^\\+93\\d{9}$"
+  },
+  {
+    "nome": "África do Sul",
+    "iso": "ZA",
+    "indicativo_telefone": "+27",
+    "regex_telefone": "^\\+27\\d{9}$"
+  },
+  {
+    "nome": "Albânia",
+    "iso": "AL",
+    "indicativo_telefone": "+355",
+    "regex_telefone": "^\\+355\\d{8}$"
+  },
+  {
+    "nome": "Alemanha",
+    "iso": "DE",
+    "indicativo_telefone": "+49",
+    "regex_telefone": "^\\+49\\d{10,11}$"
+  },
+  {
+    "nome": "Andorra",
+    "iso": "AD",
+    "indicativo_telefone": "+376",
+    "regex_telefone": "^\\+376\\d{6}$"
+  },
+  {
+    "nome": "Angola",
+    "iso": "AO",
+    "indicativo_telefone": "+244",
+    "regex_telefone": "^\\+244\\d{9}$"
+  },
+  {
+    "nome": "Anguila",
+    "iso": "AI",
+    "indicativo_telefone": "+1264",
+    "regex_telefone": "^\\+1264\\d{7}$"
+  },
+  {
+    "nome": "Antártida",
+    "iso": "AQ",
+    "indicativo_telefone": "+672",
+    "regex_telefone": "^\\+672\\d{6}$"
+  },
+  {
+    "nome": "Antígua e Barbuda",
+    "iso": "AG",
+    "indicativo_telefone": "+1268",
+    "regex_telefone": "^\\+1268\\d{7}$"
+  },
+  {
+    "nome": "Arábia Saudita",
+    "iso": "SA",
+    "indicativo_telefone": "+966",
+    "regex_telefone": "^\\+966\\d{9}$"
+  },
+  {
+    "nome": "Argélia",
+    "iso": "DZ",
+    "indicativo_telefone": "+213",
+    "regex_telefone": "^\\+213\\d{9}$"
+  },
+  {
+    "nome": "Argentina",
+    "iso": "AR",
+    "indicativo_telefone": "+54",
+    "regex_telefone": "^\\+54\\d{10,11}$"
+  },
+  {
+    "nome": "Arménia",
+    "iso": "AM",
+    "indicativo_telefone": "+374",
+    "regex_telefone": "^\\+374\\d{8}$"
+  },
+  {
+    "nome": "Aruba",
+    "iso": "AW",
+    "indicativo_telefone": "+297",
+    "regex_telefone": "^\\+297\\d{7}$"
+  },
+  {
+    "nome": "Austrália",
+    "iso": "AU",
+    "indicativo_telefone": "+61",
+    "regex_telefone": "^\\+61\\d{9}$"
+  },
+  {
+    "nome": "Áustria",
+    "iso": "AT",
+    "indicativo_telefone": "+43",
+    "regex_telefone": "^\\+43\\d{10,11}$"
+  },
+  {
+    "nome": "Azerbaijão",
+    "iso": "AZ",
+    "indicativo_telefone": "+994",
+    "regex_telefone": "^\\+994\\d{9}$"
+  },
+  {
+    "nome": "Bahamas",
+    "iso": "BS",
+    "indicativo_telefone": "+1242",
+    "regex_telefone": "^\\+1242\\d{7}$"
+  },
+  {
+    "nome": "Bangladexe",
+    "iso": "BD",
+    "indicativo_telefone": "+880",
+    "regex_telefone": "^\\+880\\d{10}$"
+  },
+  {
+    "nome": "Barbados",
+    "iso": "BB",
+    "indicativo_telefone": "+1246",
+    "regex_telefone": "^\\+1246\\d{7}$"
+  },
+  {
+    "nome": "Barém",
+    "iso": "BH",
+    "indicativo_telefone": "+973",
+    "regex_telefone": "^\\+973\\d{8}$"
+  },
+  {
+    "nome": "Bélgica",
+    "iso": "BE",
+    "indicativo_telefone": "+32",
+    "regex_telefone": "^\\+32\\d{9}$"
+  },
+  {
+    "nome": "Belize",
+    "iso": "BZ",
+    "indicativo_telefone": "+501",
+    "regex_telefone": "^\\+501\\d{7}$"
+  },
+  {
+    "nome": "Benim",
+    "iso": "BJ",
+    "indicativo_telefone": "+229",
+    "regex_telefone": "^\\+229\\d{8}$"
+  },
+  {
+    "nome": "Bermudas",
+    "iso": "BM",
+    "indicativo_telefone": "+1441",
+    "regex_telefone": "^\\+1441\\d{7}$"
+  },
+  {
+    "nome": "Bielorrússia",
+    "iso": "BY",
+    "indicativo_telefone": "+375",
+    "regex_telefone": "^\\+375\\d{9}$"
+  },
+  {
+    "nome": "Bolívia",
+    "iso": "BO",
+    "indicativo_telefone": "+591",
+    "regex_telefone": "^\\+591\\d{8}$"
+  },
+  {
+    "nome": "Bósnia e Herzegovina",
+    "iso": "BA",
+    "indicativo_telefone": "+387",
+    "regex_telefone": "^\\+387\\d{8}$"
+  },
+  {
+    "nome": "Botsuana",
+    "iso": "BW",
+    "indicativo_telefone": "+267",
+    "regex_telefone": "^\\+267\\d{7}$"
+  },
+  {
+    "nome": "Brasil",
+    "iso": "BR",
+    "indicativo_telefone": "+55",
+    "regex_telefone": "^\\+55\\d{10,11}$"
+  },
+  {
+    "nome": "Brunei Darussalam",
+    "iso": "BN",
+    "indicativo_telefone": "+673",
+    "regex_telefone": "^\\+673\\d{7}$"
+  },
+  {
+    "nome": "Bulgária",
+    "iso": "BG",
+    "indicativo_telefone": "+359",
+    "regex_telefone": "^\\+359\\d{9}$"
+  },
+  {
+    "nome": "Burquina Fasso",
+    "iso": "BF",
+    "indicativo_telefone": "+226",
+    "regex_telefone": "^\\+226\\d{8}$"
+  },
+  {
+    "nome": "Burundi",
+    "iso": "BI",
+    "indicativo_telefone": "+257",
+    "regex_telefone": "^\\+257\\d{8}$"
+  },
+  {
+    "nome": "Butão",
+    "iso": "BT",
+    "indicativo_telefone": "+975",
+    "regex_telefone": "^\\+975\\d{7}$"
+  },
+  {
+    "nome": "Cabo Verde",
+    "iso": "CV",
+    "indicativo_telefone": "+238",
+    "regex_telefone": "^\\+238\\d{7}$"
+  },
+  {
+    "nome": "Camarões",
+    "iso": "CM",
+    "indicativo_telefone": "+237",
+    "regex_telefone": "^\\+237\\d{8}$"
+  },
+  {
+    "nome": "Camboja",
+    "iso": "KH",
+    "indicativo_telefone": "+855",
+    "regex_telefone": "^\\+855\\d{8,9}$"
+  },
+  {
+    "nome": "Canadá",
+    "iso": "CA",
+    "indicativo_telefone": "+1",
+    "regex_telefone": "^\\+1\\d{10}$"
+  },
+  {
+    "nome": "Catar",
+    "iso": "QA",
+    "indicativo_telefone": "+974",
+    "regex_telefone": "^\\+974\\d{8}$"
+  },
+  {
+    "nome": "Cazaquistão",
+    "iso": "KZ",
+    "indicativo_telefone": "+7",
+    "regex_telefone": "^\\+7\\d{10}$"
+  },
+  {
+    "nome": "República Centro-Africana",
+    "iso": "CF",
+    "indicativo_telefone": "+236",
+    "regex_telefone": "^\\+236\\d{8}$"
+  },
+  {
+    "nome": "Chade",
+    "iso": "TD",
+    "indicativo_telefone": "+235",
+    "regex_telefone": "^\\+235\\d{8}$"
+  },
+  {
+    "nome": "Chéquia",
+    "iso": "CZ",
+    "indicativo_telefone": "+420",
+    "regex_telefone": "^\\+420\\d{9}$"
+  },
+  {
+    "nome": "Chile",
+    "iso": "CL",
+    "indicativo_telefone": "+56",
+    "regex_telefone": "^\\+56\\d{9}$"
+  },
+  {
+    "nome": "China",
+    "iso": "CN",
+    "indicativo_telefone": "+86",
+    "regex_telefone": "^\\+86\\d{10,11}$"
+  },
+  {
+    "nome": "Chipre",
+    "iso": "CY",
+    "indicativo_telefone": "+357",
+    "regex_telefone": "^\\+357\\d{8}$"
+  },
+  {
+    "nome": "Colômbia",
+    "iso": "CO",
+    "indicativo_telefone": "+57",
+    "regex_telefone": "^\\+57\\d{10}$"
+  },
+  {
+    "nome": "Comores",
+    "iso": "KM",
+    "indicativo_telefone": "+269",
+    "regex_telefone": "^\\+269\\d{7}$"
+  },
+  {
+    "nome": "Congo",
+    "iso": "CG",
+    "indicativo_telefone": "+242",
+    "regex_telefone": "^\\+242\\d{9}$"
+  },
+  {
+    "nome": "Coreia do Sul",
+    "iso": "KR",
+    "indicativo_telefone": "+82",
+    "regex_telefone": "^\\+82\\d{9,10}$"
+  },
+  {
+    "nome": "Coreia do Norte",
+    "iso": "KP",
+    "indicativo_telefone": "+850",
+    "regex_telefone": "^\\+850\\d{7,12}$"
+  },
+  {
+    "nome": "Costa do Marfim",
+    "iso": "CI",
+    "indicativo_telefone": "+225",
+    "regex_telefone": "^\\+225\\d{8}$"
+  },
+  {
+    "nome": "Costa Rica",
+    "iso": "CR",
+    "indicativo_telefone": "+506",
+    "regex_telefone": "^\\+506\\d{8}$"
+  },
+  {
+    "nome": "Croácia",
+    "iso": "HR",
+    "indicativo_telefone": "+385",
+    "regex_telefone": "^\\+385\\d{8,9}$"
+  },
+  {
+    "nome": "Cuba",
+    "iso": "CU",
+    "indicativo_telefone": "+53",
+    "regex_telefone": "^\\+53\\d{8}$"
+  },
+  {
+    "nome": "Curaçau",
+    "iso": "CW",
+    "indicativo_telefone": "+599",
+    "regex_telefone": "^\\+599\\d{7}$"
+  },
+  {
+    "nome": "Dinamarca",
+    "iso": "DK",
+    "indicativo_telefone": "+45",
+    "regex_telefone": "^\\+45\\d{8}$"
+  },
+  {
+    "nome": "Dominica",
+    "iso": "DM",
+    "indicativo_telefone": "+1767",
+    "regex_telefone": "^\\+1767\\d{7}$"
+  },
+  {
+    "nome": "Egito",
+    "iso": "EG",
+    "indicativo_telefone": "+20",
+    "regex_telefone": "^\\+20\\d{10}$"
+  },
+  {
+    "nome": "El Salvador",
+    "iso": "SV",
+    "indicativo_telefone": "+503",
+    "regex_telefone": "^\\+503\\d{8}$"
+  },
+  {
+    "nome": "Emirados Árabes Unidos",
+    "iso": "AE",
+    "indicativo_telefone": "+971",
+    "regex_telefone": "^\\+971\\d{9}$"
+  },
+  {
+    "nome": "Equador",
+    "iso": "EC",
+    "indicativo_telefone": "+593",
+    "regex_telefone": "^\\+593\\d{9}$"
+  },
+  {
+    "nome": "Eritreia",
+    "iso": "ER",
+    "indicativo_telefone": "+291",
+    "regex_telefone": "^\\+291\\d{7}$"
+  },
+  {
+    "nome": "Eslováquia",
+    "iso": "SK",
+    "indicativo_telefone": "+421",
+    "regex_telefone": "^\\+421\\d{9}$"
+  },
+  {
+    "nome": "Eslovénia",
+    "iso": "SI",
+    "indicativo_telefone": "+386",
+    "regex_telefone": "^\\+386\\d{8}$"
+  },
+  {
+    "nome": "Espanha",
+    "iso": "ES",
+    "indicativo_telefone": "+34",
+    "regex_telefone": "^\\+34\\d{9}$"
+  },
+  {
+    "nome": "Essuatíni",
+    "iso": "SZ",
+    "indicativo_telefone": "+268",
+    "regex_telefone": "^\\+268\\d{8}$"
+  },
+  {
+    "nome": "Estados Unidos",
+    "iso": "US",
+    "indicativo_telefone": "+1",
+    "regex_telefone": "^\\+1\\d{10}$"
+  },
+  {
+    "nome": "Estónia",
+    "iso": "EE",
+    "indicativo_telefone": "+372",
+    "regex_telefone": "^\\+372\\d{7,8}$"
+  },
+  {
+    "nome": "Etiópia",
+    "iso": "ET",
+    "indicativo_telefone": "+251",
+    "regex_telefone": "^\\+251\\d{9}$"
+  },
+  {
+    "nome": "Filipinas",
+    "iso": "PH",
+    "indicativo_telefone": "+63",
+    "regex_telefone": "^\\+63\\d{10}$"
+  },
+  {
+    "nome": "Finlândia",
+    "iso": "FI",
+    "indicativo_telefone": "+358",
+    "regex_telefone": "^\\+358\\d{9}$"
+  },
+  {
+    "nome": "França",
+    "iso": "FR",
+    "indicativo_telefone": "+33",
+    "regex_telefone": "^\\+33\\d{9}$"
+  },
+  {
+    "nome": "Gabão",
+    "iso": "GA",
+    "indicativo_telefone": "+241",
+    "regex_telefone": "^\\+241\\d{7}$"
+  },
+  {
+    "nome": "Gâmbia",
+    "iso": "GM",
+    "indicativo_telefone": "+220",
+    "regex_telefone": "^\\+220\\d{7}$"
+  },
+  {
+    "nome": "Gana",
+    "iso": "GH",
+    "indicativo_telefone": "+233",
+    "regex_telefone": "^\\+233\\d{9}$"
+  },
+  {
+    "nome": "Geórgia",
+    "iso": "GE",
+    "indicativo_telefone": "+995",
+    "regex_telefone": "^\\+995\\d{9}$"
+  },
+  {
+    "nome": "Geórgia do Sul e Ilhas Sandwich",
+    "iso": "GS",
+    "indicativo_telefone": "+500",
+    "regex_telefone": "^\\+500\\d{5}$"
+  },
+  {
+    "nome": "Guernsey",
+    "iso": "GG",
+    "indicativo_telefone": "+441481",
+    "regex_telefone": "^\\+441481\\d{6}$"
+  },
+  {
+    "nome": "Gibraltar",
+    "iso": "GI",
+    "indicativo_telefone": "+350",
+    "regex_telefone": "^\\+350\\d{8}$"
+  },
+  {
+    "nome": "Granada",
+    "iso": "GD",
+    "indicativo_telefone": "+1473",
+    "regex_telefone": "^\\+1473\\d{7}$"
+  },
+  {
+    "nome": "Gronelândia",
+    "iso": "GL",
+    "indicativo_telefone": "+299",
+    "regex_telefone": "^\\+299\\d{6}$"
+  },
+  {
+    "nome": "Guadalupe",
+    "iso": "GP",
+    "indicativo_telefone": "+590",
+    "regex_telefone": "^\\+590\\d{9}$"
+  },
+  {
+    "nome": "Guam",
+    "iso": "GU",
+    "indicativo_telefone": "+1671",
+    "regex_telefone": "^\\+1671\\d{7}$"
+  },
+  {
+    "nome": "Guatemala",
+    "iso": "GT",
+    "indicativo_telefone": "+502",
+    "regex_telefone": "^\\+502\\d{8}$"
+  },
+  {
+    "nome": "Guiana",
+    "iso": "GY",
+    "indicativo_telefone": "+592",
+    "regex_telefone": "^\\+592\\d{7}$"
+  },
+  {
+    "nome": "Guiana Francesa",
+    "iso": "GF",
+    "indicativo_telefone": "+594",
+    "regex_telefone": "^\\+594\\d{9}$"
+  },
+  {
+    "nome": "Guiné",
+    "iso": "GN",
+    "indicativo_telefone": "+224",
+    "regex_telefone": "^\\+224\\d{8}$"
+  },
+  {
+    "nome": "Guiné Equatorial",
+    "iso": "GQ",
+    "indicativo_telefone": "+240",
+    "regex_telefone": "^\\+240\\d{9}$"
+  },
+  {
+    "nome": "Guiné-Bissau",
+    "iso": "GW",
+    "indicativo_telefone": "+245",
+    "regex_telefone": "^\\+245\\d{7}$"
+  },
+  {
+    "nome": "Haiti",
+    "iso": "HT",
+    "indicativo_telefone": "+509",
+    "regex_telefone": "^\\+509\\d{8}$"
+  },
+  {
+    "nome": "Honduras",
+    "iso": "HN",
+    "indicativo_telefone": "+504",
+    "regex_telefone": "^\\+504\\d{8}$"
+  },
+  {
+    "nome": "Hong Kong",
+    "iso": "HK",
+    "indicativo_telefone": "+852",
+    "regex_telefone": "^\\+852\\d{8}$"
+  },
+  {
+    "nome": "Hungria",
+    "iso": "HU",
+    "indicativo_telefone": "+36",
+    "regex_telefone": "^\\+36\\d{9}$"
+  },
+  {
+    "nome": "Iémen",
+    "iso": "YE",
+    "indicativo_telefone": "+967",
+    "regex_telefone": "^\\+967\\d{9}$"
+  },
+  {
+    "nome": "Ilha de Man",
+    "iso": "IM",
+    "indicativo_telefone": "+441624",
+    "regex_telefone": "^\\+441624\\d{6}$"
+  },
+  {
+    "nome": "Ilhas Aland",
+    "iso": "AX",
+    "indicativo_telefone": "+35818",
+    "regex_telefone": "^\\+35818\\d{5,8}$"
+  },
+  {
+    "nome": "Ilhas Bouvet",
+    "iso": "BV",
+    "indicativo_telefone": "",
+    "regex_telefone": ".*"
+  },
+  {
+    "nome": "Ilhas Caimão",
+    "iso": "KY",
+    "indicativo_telefone": "+1345",
+    "regex_telefone": "^\\+1345\\d{7}$"
+  },
+  {
+    "nome": "Ilhas Christmas",
+    "iso": "CX",
+    "indicativo_telefone": "+61",
+    "regex_telefone": "^\\+61\\d{9}$"
+  },
+  {
+    "nome": "Ilhas Cocos (Keeling)",
+    "iso": "CC",
+    "indicativo_telefone": "+61",
+    "regex_telefone": "^\\+61\\d{9}$"
+  },
+  {
+    "nome": "Ilhas Cook",
+    "iso": "CK",
+    "indicativo_telefone": "+682",
+    "regex_telefone": "^\\+682\\d{5}$"
+  },
+  {
+    "nome": "Ilhas Falkland (Malvinas)",
+    "iso": "FK",
+    "indicativo_telefone": "+500",
+    "regex_telefone": "^\\+500\\d{5}$"
+  },
+  {
+    "nome": "Ilhas Faroé",
+    "iso": "FO",
+    "indicativo_telefone": "+298",
+    "regex_telefone": "^\\+298\\d{6}$"
+  },
+  {
+    "nome": "Fiji",
+    "iso": "FJ",
+    "indicativo_telefone": "+679",
+    "regex_telefone": "^\\+679\\d{7}$"
+  },
+  {
+    "nome": "Ilhas Heard e Ilhas McDonald",
+    "iso": "HM",
+    "indicativo_telefone": "",
+    "regex_telefone": ".*"
+  },
+  {
+    "nome": "Ilhas Marianas do Norte",
+    "iso": "MP",
+    "indicativo_telefone": "+1670",
+    "regex_telefone": "^\\+1670\\d{7}$"
+  },
+  {
+    "nome": "Ilhas Marshall",
+    "iso": "MH",
+    "indicativo_telefone": "+692",
+    "regex_telefone": "^\\+692\\d{7}$"
+  },
+  {
+    "nome": "Ilhas Menores Distantes dos Estados Unidos",
+    "iso": "UM",
+    "indicativo_telefone": "+1",
+    "regex_telefone": "^\\+1\\d{10}$"
+  },
+  {
+    "nome": "Ilhas Norfolk",
+    "iso": "NF",
+    "indicativo_telefone": "+672",
+    "regex_telefone": "^\\+672\\d{6}$"
+  },
+  {
+    "nome": "Ilhas Salomão",
+    "iso": "SB",
+    "indicativo_telefone": "+677",
+    "regex_telefone": "^\\+677\\d{7}$"
+  },
+  {
+    "nome": "Ilhas Virgens (Britânicas)",
+    "iso": "VG",
+    "indicativo_telefone": "+1284",
+    "regex_telefone": "^\\+1284\\d{7}$"
+  },
+  {
+    "nome": "Ilhas Virgens (Estados Unidos)",
+    "iso": "VI",
+    "indicativo_telefone": "+1340",
+    "regex_telefone": "^\\+1340\\d{7}$"
+  },
+  {
+    "nome": "Índia",
+    "iso": "IN",
+    "indicativo_telefone": "+91",
+    "regex_telefone": "^\\+91\\d{10}$"
+  },
+  {
+    "nome": "Indonésia",
+    "iso": "ID",
+    "indicativo_telefone": "+62",
+    "regex_telefone": "^\\+62\\d{9,11}$"
+  },
+  {
+    "nome": "Irão",
+    "iso": "IR",
+    "indicativo_telefone": "+98",
+    "regex_telefone": "^\\+98\\d{10}$"
+  },
+  {
+    "nome": "Iraque",
+    "iso": "IQ",
+    "indicativo_telefone": "+964",
+    "regex_telefone": "^\\+964\\d{9}$"
+  },
+  {
+    "nome": "Irlanda",
+    "iso": "IE",
+    "indicativo_telefone": "+353",
+    "regex_telefone": "^\\+353\\d{9}$"
+  },
+  {
+    "nome": "Islândia",
+    "iso": "IS",
+    "indicativo_telefone": "+354",
+    "regex_telefone": "^\\+354\\d{7}$"
+  },
+  {
+    "nome": "Israel",
+    "iso": "IL",
+    "indicativo_telefone": "+972",
+    "regex_telefone": "^\\+972\\d{9}$"
+  },
+  {
+    "nome": "Itália",
+    "iso": "IT",
+    "indicativo_telefone": "+39",
+    "regex_telefone": "^\\+39\\d{9,10}$"
+  },
+  {
+    "nome": "Jamaica",
+    "iso": "JM",
+    "indicativo_telefone": "+1876",
+    "regex_telefone": "^\\+1876\\d{7}$"
+  },
+  {
+    "nome": "Japão",
+    "iso": "JP",
+    "indicativo_telefone": "+81",
+    "regex_telefone": "^\\+81\\d{10}$"
+  },
+  {
+    "nome": "Jersey",
+    "iso": "JE",
+    "indicativo_telefone": "+441534",
+    "regex_telefone": "^\\+441534\\d{6}$"
+  },
+  {
+    "nome": "Jibuti",
+    "iso": "DJ",
+    "indicativo_telefone": "+253",
+    "regex_telefone": "^\\+253\\d{6}$"
+  },
+  {
+    "nome": "Jordânia",
+    "iso": "JO",
+    "indicativo_telefone": "+962",
+    "regex_telefone": "^\\+962\\d{9}$"
+  },
+  {
+    "nome": "Quénia",
+    "iso": "KE",
+    "indicativo_telefone": "+254",
+    "regex_telefone": "^\\+254\\d{9}$"
+  },
+  {
+    "nome": "Kiribati",
+    "iso": "KI",
+    "indicativo_telefone": "+686",
+    "regex_telefone": "^\\+686\\d{5}$"
+  },
+  {
+    "nome": "Kuwait",
+    "iso": "KW",
+    "indicativo_telefone": "+965",
+    "regex_telefone": "^\\+965\\d{8}$"
+  },
+  {
+    "nome": "Laos",
+    "iso": "LA",
+    "indicativo_telefone": "+856",
+    "regex_telefone": "^\\+856\\d{8,9}$"
+  },
+  {
+    "nome": "Lesoto",
+    "iso": "LS",
+    "indicativo_telefone": "+266",
+    "regex_telefone": "^\\+266\\d{8}$"
+  },
+  {
+    "nome": "Letónia",
+    "iso": "LV",
+    "indicativo_telefone": "+371",
+    "regex_telefone": "^\\+371\\d{8}$"
+  },
+  {
+    "nome": "Líbano",
+    "iso": "LB",
+    "indicativo_telefone": "+961",
+    "regex_telefone": "^\\+961\\d{8}$"
+  },
+  {
+    "nome": "Libéria",
+    "iso": "LR",
+    "indicativo_telefone": "+231",
+    "regex_telefone": "^\\+231\\d{7,8}$"
+  },
+  {
+    "nome": "Líbia",
+    "iso": "LY",
+    "indicativo_telefone": "+218",
+    "regex_telefone": "^\\+218\\d{9}$"
+  },
+  {
+    "nome": "Liechtenstein",
+    "iso": "LI",
+    "indicativo_telefone": "+423",
+    "regex_telefone": "^\\+423\\d{7}$"
+  },
+  {
+    "nome": "Lituânia",
+    "iso": "LT",
+    "indicativo_telefone": "+370",
+    "regex_telefone": "^\\+370\\d{8}$"
+  },
+  {
+    "nome": "Luxemburgo",
+    "iso": "LU",
+    "indicativo_telefone": "+352",
+    "regex_telefone": "^\\+352\\d{8,9}$"
+  },
+  {
+    "nome": "Macau",
+    "iso": "MO",
+    "indicativo_telefone": "+853",
+    "regex_telefone": "^\\+853\\d{8}$"
+  },
+  {
+    "nome": "Macedónia do Norte",
+    "iso": "MK",
+    "indicativo_telefone": "+389",
+    "regex_telefone": "^\\+389\\d{8}$"
+  },
+  {
+    "nome": "Madagáscar",
+    "iso": "MG",
+    "indicativo_telefone": "+261",
+    "regex_telefone": "^\\+261\\d{9}$"
+  },
+  {
+    "nome": "Malásia",
+    "iso": "MY",
+    "indicativo_telefone": "+60",
+    "regex_telefone": "^\\+60\\d{8,9}$"
+  },
+  {
+    "nome": "Malawi",
+    "iso": "MW",
+    "indicativo_telefone": "+265",
+    "regex_telefone": "^\\+265\\d{7,8}$"
+  },
+  {
+    "nome": "Maldivas",
+    "iso": "MV",
+    "indicativo_telefone": "+960",
+    "regex_telefone": "^\\+960\\d{7}$"
+  },
+  {
+    "nome": "Mali",
+    "iso": "ML",
+    "indicativo_telefone": "+223",
+    "regex_telefone": "^\\+223\\d{8}$"
+  },
+  {
+    "nome": "Malta",
+    "iso": "MT",
+    "indicativo_telefone": "+356",
+    "regex_telefone": "^\\+356\\d{8}$"
+  },
+  {
+    "nome": "Marrocos",
+    "iso": "MA",
+    "indicativo_telefone": "+212",
+    "regex_telefone": "^\\+212\\d{9}$"
+  },
+  {
+    "nome": "Martinica",
+    "iso": "MQ",
+    "indicativo_telefone": "+596",
+    "regex_telefone": "^\\+596\\d{9}$"
+  },
+  {
+    "nome": "Maurícia",
+    "iso": "MU",
+    "indicativo_telefone": "+230",
+    "regex_telefone": "^\\+230\\d{7}$"
+  },
+  {
+    "nome": "Mauritânia",
+    "iso": "MR",
+    "indicativo_telefone": "+222",
+    "regex_telefone": "^\\+222\\d{8}$"
+  },
+  {
+    "nome": "Mayotte",
+    "iso": "YT",
+    "indicativo_telefone": "+262",
+    "regex_telefone": "^\\+262\\d{9}$"
+  },
+  {
+    "nome": "México",
+    "iso": "MX",
+    "indicativo_telefone": "+52",
+    "regex_telefone": "^\\+52\\d{10}$"
+  },
+  {
+    "nome": "Mianmar",
+    "iso": "MM",
+    "indicativo_telefone": "+95",
+    "regex_telefone": "^\\+95\\d{7,10}$"
+  },
+  {
+    "nome": "Micronésia",
+    "iso": "FM",
+    "indicativo_telefone": "+691",
+    "regex_telefone": "^\\+691\\d{7}$"
+  },
+  {
+    "nome": "Moçambique",
+    "iso": "MZ",
+    "indicativo_telefone": "+258",
+    "regex_telefone": "^\\+258\\d{9}$"
+  },
+  {
+    "nome": "Moldávia",
+    "iso": "MD",
+    "indicativo_telefone": "+373",
+    "regex_telefone": "^\\+373\\d{8}$"
+  },
+  {
+    "nome": "Mónaco",
+    "iso": "MC",
+    "indicativo_telefone": "+377",
+    "regex_telefone": "^\\+377\\d{8,9}$"
+  },
+  {
+    "nome": "Mongólia",
+    "iso": "MN",
+    "indicativo_telefone": "+976",
+    "regex_telefone": "^\\+976\\d{8}$"
+  },
+  {
+    "nome": "Monserrate",
+    "iso": "MS",
+    "indicativo_telefone": "+1664",
+    "regex_telefone": "^\\+1664\\d{7}$"
+  },
+  {
+    "nome": "Montenegro",
+    "iso": "ME",
+    "indicativo_telefone": "+382",
+    "regex_telefone": "^\\+382\\d{8}$"
+  },
+  {
+    "nome": "Namíbia",
+    "iso": "NA",
+    "indicativo_telefone": "+264",
+    "regex_telefone": "^\\+264\\d{9}$"
+  },
+  {
+    "nome": "Nauru",
+    "iso": "NR",
+    "indicativo_telefone": "+674",
+    "regex_telefone": "^\\+674\\d{7}$"
+  },
+  {
+    "nome": "Nepal",
+    "iso": "NP",
+    "indicativo_telefone": "+977",
+    "regex_telefone": "^\\+977\\d{10}$"
+  },
+  {
+    "nome": "Nicarágua",
+    "iso": "NI",
+    "indicativo_telefone": "+505",
+    "regex_telefone": "^\\+505\\d{8}$"
+  },
+  {
+    "nome": "Níger",
+    "iso": "NE",
+    "indicativo_telefone": "+227",
+    "regex_telefone": "^\\+227\\d{8}$"
+  },
+  {
+    "nome": "Nigéria",
+    "iso": "NG",
+    "indicativo_telefone": "+234",
+    "regex_telefone": "^\\+234\\d{10}$"
+  },
+  {
+    "nome": "Niue",
+    "iso": "NU",
+    "indicativo_telefone": "+683",
+    "regex_telefone": "^\\+683\\d{4}$"
+  },
+  {
+    "nome": "Noruega",
+    "iso": "NO",
+    "indicativo_telefone": "+47",
+    "regex_telefone": "^\\+47\\d{8}$"
+  },
+  {
+    "nome": "Nova Caledónia",
+    "iso": "NC",
+    "indicativo_telefone": "+687",
+    "regex_telefone": "^\\+687\\d{6}$"
+  },
+  {
+    "nome": "Nova Zelândia",
+    "iso": "NZ",
+    "indicativo_telefone": "+64",
+    "regex_telefone": "^\\+64\\d{8,9}$"
+  },
+  {
+    "nome": "Omã",
+    "iso": "OM",
+    "indicativo_telefone": "+968",
+    "regex_telefone": "^\\+968\\d{8}$"
+  },
+  {
+    "nome": "Países Baixos",
+    "iso": "NL",
+    "indicativo_telefone": "+31",
+    "regex_telefone": "^\\+31\\d{9}$"
+  },
+  {
+    "nome": "Países Baixos Caribenhos",
+    "iso": "BQ",
+    "indicativo_telefone": "+599",
+    "regex_telefone": "^\\+599\\d{7}$"
+  },
+  {
+    "nome": "Palau",
+    "iso": "PW",
+    "indicativo_telefone": "+680",
+    "regex_telefone": "^\\+680\\d{7}$"
+  },
+  {
+    "nome": "Panamá",
+    "iso": "PA",
+    "indicativo_telefone": "+507",
+    "regex_telefone": "^\\+507\\d{8}$"
+  },
+  {
+    "nome": "Papuásia-Nova Guiné",
+    "iso": "PG",
+    "indicativo_telefone": "+675",
+    "regex_telefone": "^\\+675\\d{7}$"
+  },
+  {
+    "nome": "Paquistão",
+    "iso": "PK",
+    "indicativo_telefone": "+92",
+    "regex_telefone": "^\\+92\\d{10}$"
+  },
+  {
+    "nome": "Paraguai",
+    "iso": "PY",
+    "indicativo_telefone": "+595",
+    "regex_telefone": "^\\+595\\d{9}$"
+  },
+  {
+    "nome": "Peru",
+    "iso": "PE",
+    "indicativo_telefone": "+51",
+    "regex_telefone": "^\\+51\\d{9}$"
+  },
+  {
+    "nome": "Pitcairn",
+    "iso": "PN",
+    "indicativo_telefone": "+64",
+    "regex_telefone": "^\\+64\\d{8,9}$"
+  },
+  {
+    "nome": "Polinésia Francesa",
+    "iso": "PF",
+    "indicativo_telefone": "+689",
+    "regex_telefone": "^\\+689\\d{6}$"
+  },
+  {
+    "nome": "Polónia",
+    "iso": "PL",
+    "indicativo_telefone": "+48",
+    "regex_telefone": "^\\+48\\d{9}$"
+  },
+  {
+    "nome": "Porto Rico",
+    "iso": "PR",
+    "indicativo_telefone": "+1787",
+    "regex_telefone": "^\\+1787\\d{7}$"
+  },
+  {
+    "nome": "Portugal",
+    "iso": "PT",
+    "indicativo_telefone": "+351",
+    "regex_telefone": "^\\+351(2\\d{8}|9[1236]\\d{7})$"
+  },
+  {
+    "nome": "Quirguizistão",
+    "iso": "KG",
+    "indicativo_telefone": "+996",
+    "regex_telefone": "^\\+996\\d{9}$"
+  },
+  {
+    "nome": "Reino Unido",
+    "iso": "GB",
+    "indicativo_telefone": "+44",
+    "regex_telefone": "^\\+44\\d{10}$"
+  },
+  {
+    "nome": "República Dominicana",
+    "iso": "DO",
+    "indicativo_telefone": "+1809",
+    "regex_telefone": "^\\+1809\\d{7}$"
+  },
+  {
+    "nome": "Reunião",
+    "iso": "RE",
+    "indicativo_telefone": "+262",
+    "regex_telefone": "^\\+262\\d{9}$"
+  },
+  {
+    "nome": "Roménia",
+    "iso": "RO",
+    "indicativo_telefone": "+40",
+    "regex_telefone": "^\\+40\\d{9}$"
+  },
+  {
+    "nome": "Ruanda",
+    "iso": "RW",
+    "indicativo_telefone": "+250",
+    "regex_telefone": "^\\+250\\d{9}$"
+  },
+  {
+    "nome": "Rússia",
+    "iso": "RU",
+    "indicativo_telefone": "+7",
+    "regex_telefone": "^\\+7\\d{10}$"
+  },
+  {
+    "nome": "Samoa",
+    "iso": "WS",
+    "indicativo_telefone": "+685",
+    "regex_telefone": "^\\+685\\d{7}$"
+  },
+  {
+    "nome": "Samoa Americana",
+    "iso": "AS",
+    "indicativo_telefone": "+1684",
+    "regex_telefone": "^\\+1684\\d{7}$"
+  },
+  {
+    "nome": "Santa Helena",
+    "iso": "SH",
+    "indicativo_telefone": "+290",
+    "regex_telefone": "^\\+290\\d{4}$"
+  },
+  {
+    "nome": "Santa Lúcia",
+    "iso": "LC",
+    "indicativo_telefone": "+1758",
+    "regex_telefone": "^\\+1758\\d{7}$"
+  },
+  {
+    "nome": "Santa Sé (Cidade Estado do Vaticano)",
+    "iso": "VA",
+    "indicativo_telefone": "+379",
+    "regex_telefone": "^\\+379\\d{9}$"
+  },
+  {
+    "nome": "São Bartolomeu",
+    "iso": "BL",
+    "indicativo_telefone": "+590",
+    "regex_telefone": "^\\+590\\d{9}$"
+  },
+  {
+    "nome": "São Cristóvão e Neves",
+    "iso": "KN",
+    "indicativo_telefone": "+1869",
+    "regex_telefone": "^\\+1869\\d{7}$"
+  },
+  {
+    "nome": "São Marino",
+    "iso": "SM",
+    "indicativo_telefone": "+378",
+    "regex_telefone": "^\\+378\\d{10}$"
+  },
+  {
+    "nome": "São Martinho",
+    "iso": "SX",
+    "indicativo_telefone": "+1721",
+    "regex_telefone": "^\\+1721\\d{7}$"
+  },
+  {
+    "nome": "São Martinho (Coletividade de São Martinho)",
+    "iso": "MF",
+    "indicativo_telefone": "+590",
+    "regex_telefone": "^\\+590\\d{9}$"
+  },
+  {
+    "nome": "São Pedro e Miquelão",
+    "iso": "PM",
+    "indicativo_telefone": "+508",
+    "regex_telefone": "^\\+508\\d{6}$"
+  },
+  {
+    "nome": "São Tomé e Príncipe",
+    "iso": "ST",
+    "indicativo_telefone": "+239",
+    "regex_telefone": "^\\+239\\d{7}$"
+  },
+  {
+    "nome": "São Vicente e Granadinas",
+    "iso": "VC",
+    "indicativo_telefone": "+1784",
+    "regex_telefone": "^\\+1784\\d{7}$"
+  },
+  {
+    "nome": "Saara Ocidental",
+    "iso": "EH",
+    "indicativo_telefone": "+212",
+    "regex_telefone": "^\\+212\\d{9}$"
+  },
+  {
+    "nome": "Senegal",
+    "iso": "SN",
+    "indicativo_telefone": "+221",
+    "regex_telefone": "^\\+221\\d{9}$"
+  },
+  {
+    "nome": "Serra Leoa",
+    "iso": "SL",
+    "indicativo_telefone": "+232",
+    "regex_telefone": "^\\+232\\d{8}$"
+  },
+  {
+    "nome": "Sérvia",
+    "iso": "RS",
+    "indicativo_telefone": "+381",
+    "regex_telefone": "^\\+381\\d{8,9}$"
+  },
+  {
+    "nome": "Seicheles",
+    "iso": "SC",
+    "indicativo_telefone": "+248",
+    "regex_telefone": "^\\+248\\d{7}$"
+  },
+  {
+    "nome": "Singapura",
+    "iso": "SG",
+    "indicativo_telefone": "+65",
+    "regex_telefone": "^\\+65\\d{8}$"
+  },
+  {
+    "nome": "Síria",
+    "iso": "SY",
+    "indicativo_telefone": "+963",
+    "regex_telefone": "^\\+963\\d{9}$"
+  },
+  {
+    "nome": "Somália",
+    "iso": "SO",
+    "indicativo_telefone": "+252",
+    "regex_telefone": "^\\+252\\d{7,9}$"
+  },
+  {
+    "nome": "Sri Lanca",
+    "iso": "LK",
+    "indicativo_telefone": "+94",
+    "regex_telefone": "^\\+94\\d{9}$"
+  },
+  {
+    "nome": "Sudão",
+    "iso": "SD",
+    "indicativo_telefone": "+249",
+    "regex_telefone": "^\\+249\\d{9}$"
+  },
+  {
+    "nome": "Sudão do Sul",
+    "iso": "SS",
+    "indicativo_telefone": "+211",
+    "regex_telefone": "^\\+211\\d{9}$"
+  },
+  {
+    "nome": "Suécia",
+    "iso": "SE",
+    "indicativo_telefone": "+46",
+    "regex_telefone": "^\\+46\\d{7,10}$"
+  },
+  {
+    "nome": "Suíça",
+    "iso": "CH",
+    "indicativo_telefone": "+41",
+    "regex_telefone": "^\\+41\\d{9}$"
+  },
+  {
+    "nome": "Suriname",
+    "iso": "SR",
+    "indicativo_telefone": "+597",
+    "regex_telefone": "^\\+597\\d{7}$"
+  },
+  {
+    "nome": "Svalbard e a Ilha de Jan Mayen",
+    "iso": "SJ",
+    "indicativo_telefone": "+47",
+    "regex_telefone": "^\\+47\\d{8}$"
+  },
+  {
+    "nome": "Tailândia",
+    "iso": "TH",
+    "indicativo_telefone": "+66",
+    "regex_telefone": "^\\+66\\d{9}$"
+  },
+  {
+    "nome": "Taiwan",
+    "iso": "TW",
+    "indicativo_telefone": "+886",
+    "regex_telefone": "^\\+886\\d{9}$"
+  },
+  {
+    "nome": "Tajiquistão",
+    "iso": "TJ",
+    "indicativo_telefone": "+992",
+    "regex_telefone": "^\\+992\\d{9}$"
+  },
+  {
+    "nome": "Tanzânia, República Unida da",
+    "iso": "TZ",
+    "indicativo_telefone": "+255",
+    "regex_telefone": "^\\+255\\d{9}$"
+  },
+  {
+    "nome": "Território Britânico do Oceano Índico",
+    "iso": "IO",
+    "indicativo_telefone": "+246",
+    "regex_telefone": "^\\+246\\d{7}$"
+  },
+  {
+    "nome": "Território Palestiniano Ocupado",
+    "iso": "PS",
+    "indicativo_telefone": "+970",
+    "regex_telefone": "^\\+970\\d{9}$"
+  },
+  {
+    "nome": "Territórios Franceses do Sul",
+    "iso": "TF",
+    "indicativo_telefone": "",
+    "regex_telefone": ".*"
+  },
+  {
+    "nome": "Timor-Leste",
+    "iso": "TL",
+    "indicativo_telefone": "+670",
+    "regex_telefone": "^\\+670\\d{7}$"
+  },
+  {
+    "nome": "Togo",
+    "iso": "TG",
+    "indicativo_telefone": "+228",
+    "regex_telefone": "^\\+228\\d{8}$"
+  },
+  {
+    "nome": "Tokelau",
+    "iso": "TK",
+    "indicativo_telefone": "+690",
+    "regex_telefone": "^\\+690\\d{4}$"
+  },
+  {
+    "nome": "Tonga",
+    "iso": "TO",
+    "indicativo_telefone": "+676",
+    "regex_telefone": "^\\+676\\d{7}$"
+  },
+  {
+    "nome": "Trindade e Tobago",
+    "iso": "TT",
+    "indicativo_telefone": "+1868",
+    "regex_telefone": "^\\+1868\\d{7}$"
+  },
+  {
+    "nome": "Tunísia",
+    "iso": "TN",
+    "indicativo_telefone": "+216",
+    "regex_telefone": "^\\+216\\d{8}$"
+  },
+  {
+    "nome": "Turcos e Caicos",
+    "iso": "TC",
+    "indicativo_telefone": "+1649",
+    "regex_telefone": "^\\+1649\\d{7}$"
+  },
+  {
+    "nome": "Turquemenistão",
+    "iso": "TM",
+    "indicativo_telefone": "+993",
+    "regex_telefone": "^\\+993\\d{8}$"
+  },
+  {
+    "nome": "Turquia",
+    "iso": "TR",
+    "indicativo_telefone": "+90",
+    "regex_telefone": "^\\+90\\d{10}$"
+  },
+  {
+    "nome": "Tuvalu",
+    "iso": "TV",
+    "indicativo_telefone": "+688",
+    "regex_telefone": "^\\+688\\d{5}$"
+  },
+  {
+    "nome": "Ucrânia",
+    "iso": "UA",
+    "indicativo_telefone": "+380",
+    "regex_telefone": "^\\+380\\d{9}$"
+  },
+  {
+    "nome": "Uganda",
+    "iso": "UG",
+    "indicativo_telefone": "+256",
+    "regex_telefone": "^\\+256\\d{9}$"
+  },
+  {
+    "nome": "Uruguai",
+    "iso": "UY",
+    "indicativo_telefone": "+598",
+    "regex_telefone": "^\\+598\\d{8}$"
+  },
+  {
+    "nome": "Usbequistão",
+    "iso": "UZ",
+    "indicativo_telefone": "+998",
+    "regex_telefone": "^\\+998\\d{9}$"
+  },
+  {
+    "nome": "Vanuatu",
+    "iso": "VU",
+    "indicativo_telefone": "+678",
+    "regex_telefone": "^\\+678\\d{7}$"
+  },
+  {
+    "nome": "Venezuela",
+    "iso": "VE",
+    "indicativo_telefone": "+58",
+    "regex_telefone": "^\\+58\\d{10}$"
+  },
+  {
+    "nome": "Vietname",
+    "iso": "VN",
+    "indicativo_telefone": "+84",
+    "regex_telefone": "^\\+84\\d{9,10}$"
+  },
+  {
+    "nome": "Wallis e Futuna",
+    "iso": "WF",
+    "indicativo_telefone": "+681",
+    "regex_telefone": "^\\+681\\d{6}$"
+  },
+  {
+    "nome": "Zâmbia",
+    "iso": "ZM",
+    "indicativo_telefone": "+260",
+    "regex_telefone": "^\\+260\\d{9}$"
+  },
+  {
+    "nome": "Zimbabué",
+    "iso": "ZW",
+    "indicativo_telefone": "+263",
+    "regex_telefone": "^\\+263\\d{9}$"
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "id": "table_xbslog_nacional",
+    "name": "xbslog_nacional",
+    "type": "Nacional",
+    "carrierName": "XBS-LOG. TRANSITÁRIOS, LDA",
+    "carrierId": "carrier_1753792752487cc4f2",
+    "filename": "xbslog_nacional.json"
+  },
+  {
+    "id": "table_xbslog_international",
+    "name": "xbslog_international",
+    "type": "Internacional",
+    "carrierName": "XBS-LOG. TRANSITÁRIOS, LDA",
+    "carrierId": "carrier_1753792752487cc4f2",
+    "filename": "xbslog_international.json"
+  }
+]

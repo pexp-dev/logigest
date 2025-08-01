@@ -1,0 +1,25 @@
+[
+  {
+    "id": "carrier_1753792752487cc4f2",
+    "name": "XBS-LOG. TRANSITÁRIOS, LDA",
+    "address": "ESTRADA NACIONAL N 107 TER TIR EDIFICIO 3 4 PISO",
+    "city": "Matosinhos",
+    "postalCode": "4455-496 PERAFITA",
+    "country": "Portugal",
+    "phone": "+351220401110",
+    "email": "info@xbslog.com",
+    "website": "https://xbslog.com/",
+    "services": [
+      "Grupagem"
+    ],
+    "notes": "",
+    "logo": null,
+    "contact": {
+      "name": "Pedro Santos",
+      "function": "Comercial",
+      "email": "pedro.santos@xbslog.com",
+      "phone": "+351969918192"
+    },
+    "additionalContacts": []
+  }
+]
