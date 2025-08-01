@@ -1,1 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Administração</title>
+    <!-- Inclui estilos gerais do admin -->
+    <link rel="stylesheet" href="css/admin.css">
+    <style>
+        /* Estilos específicos para o index.html do admin */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
 
+        .dashboard-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 180px;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .dashboard-card h3 {
+            margin-top: 0;
+            color: #333;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .dashboard-card p {
+            color: #666;
+            font-size: 0.95em;
+            flex-grow: 1; /* Permite que o parágrafo ocupe o espaço disponível */
+        }
+
+        .dashboard-card a.button {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.2s ease-in-out;
+            margin-top: 15px;
+        }
+
+        .dashboard-card a.button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsividade para o grid */
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr; /* Uma coluna em telas menores */
+                padding: 15px;
+            }
+            .dashboard-card {
+                min-height: 150px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-layout">
+        <header class="admin-header">
+            <h1>Painel de Administração</h1>
+            <nav class="admin-nav">
+                <a href="carriers.html">Transportadores</a>
+                <a href="price-tables.html">Tabelas de Preços</a>
+                <a href="rules.html">Regras</a>
+            </nav>
+        </header>
+
+        <main class="admin-content">
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>Gestão de Transportadores</h3>
+                    <p>Adicione, edite ou remova informações sobre os transportadores.</p>
+                    <a href="carriers.html" class="button">Gerir Transportadores</a>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>Gestão de Tabelas de Preços</h3>
+                    <p>Crie e atualize as tabelas de preços para diferentes destinos e serviços.</p>
+                    <a href="price-tables.html" class="button">Gerir Tabelas</a>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>Gestão de Regras</h3>
+                    <p>Defina e ajuste as regras de negócio para cálculo de preços e condições.</p>
+                    <a href="rules.html" class="button">Gerir Regras</a>
+                </div>
+
+                <!-- Pode adicionar mais cards aqui conforme a necessidade -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts JavaScript podem ser adicionados aqui, se necessário para o painel -->
+    <script type="module" src="js/admin-dashboard.js"></script>
+</body>
+</html>

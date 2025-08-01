@@ -1,1 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Tabelas de Preços</title>
+    <!-- Inclui estilos gerais do admin -->
+    <link rel="stylesheet" href="/admin/css/admin.css">
+    <!-- Inclui estilos específicos desta página -->
+    <link rel="stylesheet" href="/admin/css/price-tables-admin.css">
+</head>
+<body>
+    <div class="main-layout">
+        <header class="admin-header">
+            <h1>Gestão de Tabelas de Preços</h1>
+            <nav class="admin-nav">
+                <a href="/admin/index.html">Início Admin</a>
+                <a href="/admin/carriers.html">Transportadores</a>
+                <a href="/admin/rules.html">Regras</a>
+            </nav>
+        </header>
 
+        <main class="admin-content">
+            <section id="priceTableListSection" class="price-table-list-section">
+                <h2>Tabelas de Preços Existentes</h2>
+                <div class="list-actions">
+                    <button id="newPriceTableBtn" class="action-button">Adicionar Nova Tabela</button>
+                    <select id="filterCarrier" class="action-filter">
+                        <option value="">Todos os Transportadores</option>
+                        <!-- As opções serão carregadas via JavaScript -->
+                    </select>
+                    <select id="filterType" class="action-filter">
+                        <option value="">Todos os Tipos</option>
+                        <option value="Nacional">Nacional</option>
+                        <option value="Internacional">Internacional</option>
+                        <!-- Outros tipos podem ser adicionados aqui ou via JavaScript -->
+                    </select>
+                </div>
+                <div id="priceTableList" class="price-table-list">
+                    <!-- A lista de tabelas de preços será carregada aqui pelo JavaScript -->
+                    <p>A carregar tabelas de preços...</p>
+                </div>
+            </section>
+
+            <section id="priceTableDetailSection" class="price-table-detail-section hidden">
+                <!-- Nova secção de Cabeçalho para os detalhes -->
+                <div class="detail-top-section">
+                    <div class="detail-header">
+                        <h2><span id="detailTitle">Nova Tabela de Preços</span></h2>
+                        <button id="closeDetailBtn" class="close-btn">X</button>
+                    </div>
+
+                    <!-- Formulário para metadados e observações -->
+                    <form id="priceTableMetadataForm" class="price-table-metadata-form">
+                        <input type="hidden" id="priceTableId">
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="tableName">Nome da Tabela:</label>
+                                <input type="text" id="tableName" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="tableCarrierName">Nome Transportador:</label>
+                                <select id="tableCarrierName" required> <!-- ALTERADO: de input para select -->
+                                    <option value="">Selecione um Transportador</option>
+                                    <!-- Opções serão preenchidas via JS -->
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="tableCarrierId">ID Transportador:</label>
+                                <input type="text" id="tableCarrierId" readonly> <!-- ALTERADO: apenas de leitura -->
+                            </div>
+
+                            <div class="form-group">
+                                <label for="tableType">Tipo:</label>
+                                <select id="tableType" required>
+                                    <option value="">Selecione um Tipo</option>
+                                    <option value="Nacional">Nacional</option>
+                                    <option value="Internacional">Internacional</option>
+                                    <!-- Outros tipos podem ser adicionados aqui ou via JavaScript -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="tableNotes">Observações:</label>
+                            <textarea id="tableNotes" rows="2"></textarea>
+                        </div>
+
+                        <h3>Destinos e Taxas</h3>
+                    </form>
+                </div>
+
+                <!-- Área central: Tabela de edição (Destinos e Taxas) -->
+                <div id="destinationsTableContainer" class="scroll-table">
+                    <!-- A tabela de destinos será injetada aqui pelo JavaScript -->
+                    <p>A carregar destinos...</p>
+                </div>
+
+                <!-- Nova secção de Rodapé para os detalhes -->
+                <div class="detail-bottom-section">
+                    <div id="conversionSection" class="conversion-section">
+                        <!-- A secção de conversão será injetada aqui pelo JavaScript -->
+                    </div>
+
+                    <div class="form-actions-sticky">
+                        <button type="button" id="addDestinationBtn" class="action-button">Adicionar Novo Destino</button>
+                        <button type="button" id="addEscalaoBtn" class="action-button">Adicionar Novo Escalão/Coluna</button>
+                        <button type="button" id="savePriceTableBtn">Guardar Tabela</button>
+                        <button type="button" id="deletePriceTableBtn" class="delete-btn hidden">Eliminar Tabela</button>
+                        <span id="formMessage" class="message"></span>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Datalist para países (para o autocomplete na tabela de destinos) -->
+    <datalist id="countryDatalist"></datalist>
+
+    <!-- Inclui os scripts JavaScript necessários -->
+    <script type="module" src="/admin/js/data-access/dataLoader.js"></script>
+    <script type="module" src="/admin/js/data-access/dataSaver.js"></script>
+    <!-- Agora importa apenas o módulo de lógica principal -->
+    <script type="module" src="/admin/js/price-tables-admin-logic.js"></script>
+</body>
+</html>
