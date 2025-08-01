@@ -7,13 +7,20 @@
 │   ├── database.py
 │   ├── main.py
 │   ├── models.py
+│   ├── requirements.txt
 │   ├── schemas.py
 │   ├── services.py
 │   └── tests
 │       ├── estrutura.txt
 │       └── gerar_estrutura.py
 ├── data
-│   └── a.txt
+│   ├── carriers.json
+│   ├── countries.json
+│   ├── price_tables
+│   │   ├── a.txt
+│   │   ├── xbslog_international.json
+│   │   └── xbslog_nacional.json
+│   └── price_tables_index.json
 ├── frontend-admin
 │   ├── assets
 │   │   ├── Albania.svg
@@ -31,24 +38,40 @@
 │   │   ├── Suecia.svg
 │   │   ├── Suiça.svg
 │   │   └── europamain.svg
+│   ├── carriers - original.html
 │   ├── carriers.html
 │   ├── css
-│   │   └── a.txt
+│   │   ├── admin.css
+│   │   ├── carriers-admin - original.css
+│   │   ├── carriers-admin.css
+│   │   └── price-tables-admin.css
 │   ├── index.html
 │   ├── js
-│   │   └── a.txt
+│   │   ├── carriers-admin-logic.js
+│   │   ├── carriers-admin-ui.js
+│   │   ├── carriers-admin.js
+│   │   ├── data-access
+│   │   │   ├── a.txt
+│   │   │   ├── dataLoader - original.js
+│   │   │   ├── dataLoader.js
+│   │   │   ├── dataSaver.js
+│   │   │   ├── priceTableDataLoader.js
+│   │   │   └── priceTableDataSaver.js
+│   │   ├── price-tables-admin-logic.js
+│   │   └── price-tables-admin-ui.js
 │   ├── price-tables.html
 │   └── rules.html
 ├── frontend-public
 │   ├── assets
 │   │   └── a.txt
 │   ├── css
-│   │   └── a.txt
+│   │   └── main.css
 │   ├── index.html
 │   ├── js
 │   │   └── a.txt
 │   ├── request-quote.html
 │   └── simulate.html
+├── iniciar servidor.txt
 ├── odoo-module
 │   └── README.md
 ├── tests
