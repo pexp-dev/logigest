@@ -1,0 +1,24 @@
+Para iniciar o servidor, siga estes passos no seu terminal:
+
+Navegue até à pasta backend do seu projeto logigest. Por exemplo:
+
+PowerShell
+
+cd C:\Projetos\logigest\backend
+(Ajuste o caminho para onde o seu projeto está guardado.)
+
+Ative o ambiente virtual que criou. No Windows (PowerShell):
+
+PowerShell
+
+.venv\Scripts\Activate.ps1
+Deverá ver (.venv) a aparecer no início da linha de comando, indicando que o ambiente virtual está ativo.
+
+Inicie o servidor FastAPI com o Uvicorn:
+
+Fragmento do código
+
+uvicorn main:app --reload
+Depois de executar este comando, o servidor deverá começar a correr e você verá uma mensagem no terminal a indicar que está ativo em http://127.0.0.1:8000 ou http://localhost:8000.
+
+Lembre-se de que, enquanto o servidor estiver a correr, o terminal estará ocupado. Para pará-lo, basta pressionar CTRL + C no terminal.
