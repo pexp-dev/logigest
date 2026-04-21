@@ -1,0 +1,53 @@
+{% extends "base_list.html" %}
+
+{% block page_title %}Documentos Arquivados{% endblock %}
+
+{# Não queremos o botão "Novo" #}
+{% block list_buttons %}{% endblock %}
+
+{% block filtros_extra %}
+    <label>Estado:</label>
+    <select id="filtro-status">
+        <option value="">Todos</option>
+        <option value="nao">Não exportado (Novo)</option>
+        <option value="sim">Exportado (Lido)</option>
+    </select>
+    <label>Data de processamento (início):</label>
+    <input type="date" id="filtro-data-ini">
+    <label>Data de processamento (fim):</label>
+    <input type="date" id="filtro-data-fim">
+    <label>Total (€) mínimo:</label>
+    <input type="number" id="filtro-total-min" step="0.01">
+    <label>Total (€) máximo:</label>
+    <input type="number" id="filtro-total-max" step="0.01">
+{% endblock %}
+
+{% block colunas_checkboxes %}
+    <label><input type="checkbox" value="documento" checked> Documento</label>
+    <label><input type="checkbox" value="data" checked> Data da Fatura</label>
+    <label><input type="checkbox" value="processado_em" checked> Processado em</label>
+    <label><input type="checkbox" value="total_fatura" checked> Total (€)</label>
+    <label><input type="checkbox" value="estado" checked> Estado</label>
+    <label><input type="checkbox" value="acoes" checked> Ações</label>
+{% endblock %}
+
+{% block table_headers %}
+    <th data-coluna="documento" class="sortable">Documento</th>
+    <th data-coluna="data" class="sortable">Data da Fatura</th>
+    <th data-coluna="processado_em" class="sortable">Processado em</th>
+    <th data-coluna="total_fatura" class="sortable">Total (€)</th>
+    <th data-coluna="estado">Estado</th>
+    <th>Ações</th>
+{% endblock %}
+
+{% block form_view %}{% endblock %}
+
+{# Definimos explicitamente as ações do menu (sem block.super) #}
+{% block list_actions %}
+    <a class="dropdown-item" href="#" id="export-selected"><i class="fas fa-file-excel me-2"></i>Exportar selecionados</a>
+    <a class="dropdown-item" href="#" id="export-alerts-selected"><i class="fas fa-chart-line me-2"></i>Exportar Alertas (selecionados)</a>
+{% endblock %}
+
+{% block list_extra_js %}
+    <script type="module" src="/validar/static/js/arquivo.js"></script>
+{% endblock %}

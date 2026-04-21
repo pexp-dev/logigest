@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block page_title %}Gestão de Dicionários{% endblock %}
+
+{% block extra_css %}
+<style>
+    .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+    .dicionario-card {
+        background-color: var(--bg-secondary);
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        padding: 5px 0;
+    }
+    .card-header h3 {
+        color: var(--accent);
+        margin: 0;
+        font-size: 1.3rem;
+    }
+    .card-header i {
+        color: var(--accent);
+        font-size: 1.2rem;
+        transition: transform 0.2s;
+    }
+    .card-header i.expanded {
+        transform: rotate(180deg);
+    }
+    .card-content {
+        margin-top: 15px;
+    }
+    .card-content.collapsed {
+        display: none;
+    }
+    .opcao-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px;
+        border-bottom: 1px solid var(--border-color);
+    }
+    .opcao-item:last-child { border-bottom: none; }
+    .btn-remover {
+        background-color: var(--danger-bg);
+        color: white;
+        border: none;
+        padding: 4px 8px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .add-form {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+    }
+    .add-form input {
+        flex: 1;
+        padding: 8px;
+        border-radius: 4px;
+        border: 1px solid var(--border-color);
+        background-color: var(--bg-input);
+        color: var(--text-primary);
+    }
+</style>
+{% endblock %}
+
+{% block header_actions %}
+{% endblock %}
+
+{% block content %}
+<div id="dicionarios-container"></div>
+{% endblock %}
+
+{% block extra_js %}
+<script type="module" src="/validar/static/js/dicionarios.js"></script>
+{% endblock %}

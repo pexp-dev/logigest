@@ -1,0 +1,32 @@
+{% macro search_fulltext(
+    placeholder="Pesquisar em tudo...",
+    button_text="Pesquisar",
+    id="pesquisa",
+    button_id="btn-pesquisar",
+    filtros_id="filtros-dropdown"
+) %}
+
+<div class="search-wrapper">
+    <div class="search-container">
+        <input type="text" id="{{ id }}" placeholder="{{ placeholder }}">
+        <button id="btn-filtros" class="btn btn-secondary">Filtros ▾</button>
+        <button id="{{ button_id }}" class="btn btn-primary">{{ button_text }}</button>
+    </div>
+
+    <div id="{{ filtros_id }}" class="filtros hidden">
+        <label>Categoria:<input type="text" id="filtro-categoria"></label>
+        <label>Linha:<input type="text" id="filtro-linha"></label>
+        <label>Estado:
+            <select id="filtro-estado">
+                <option value="">Todos</option>
+                <option value="Ativo">Ativo</option>
+                <option value="Inativo">Inativo</option>
+            </select>
+        </label>
+        <label>Modelo:<input type="text" id="filtro-modelo"></label>
+
+        <button id="btn-aplicar-filtros" class="btn btn-success">Aplicar</button>
+    </div>
+</div>
+
+{% endmacro %}

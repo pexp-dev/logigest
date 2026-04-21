@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block page_title %}Validação de Documento{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Ajustes específicos – todas as cores usam var() */
+    .container {
+        max-width: 1700px;
+        padding: 20px 10px;
+    }
+    .header {
+        background-color: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+    }
+    .header-left h2 {
+        font-size: 1.5rem;
+        color: var(--accent);
+        margin: 0;
+    }
+    .sidebar {
+        width: 400px;
+    }
+    .item-list {
+        max-height: 650px;
+    }
+    .item-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    .item-header h3 {
+        font-size: 1.2rem;
+        color: var(--accent);
+        font-weight: 600;
+    }
+    .item-actions {
+        display: none;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    .item-actions.visible {
+        display: flex;
+    }
+    .item-header button {
+        margin-left: auto;
+    }
+</style>
+{% endblock %}
+
+{% block header %}
+<header class="header">
+    <div class="header-left">
+        <h2 id="doc-info"><i class="fas fa-file-invoice"></i>Carregando documento...</h2>
+        <div class="nav-bar">
+            <button id="btn-anterior" class="btn btn-secondary"><i class="fas fa-chevron-left"></i> Anterior</button>
+            <span id="contador" class="contador">0/0</span>
+            <button id="btn-seguinte" class="btn btn-secondary">Seguinte <i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+    <div class="header-right">
+        <button id="theme-toggle" class="btn btn-secondary" title="Alternar tema">
+            <i class="fas fa-moon"></i> Tema
+        </button>
+        <button id="btn-voltar" class="btn btn-voltar" disabled><i class="fas fa-arrow-left"></i> Voltar</button>
+        <button id="btn-cancelar-documento" class="btn btn-danger"><i class="fas fa-times"></i> Cancelar</button>
+        <button id="btn-atualizar-bd" class="btn btn-success" style="display: none;"><i class="fas fa-database"></i> ATUALIZAR BD</button>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+<div class="main-layout">
+    <aside class="sidebar">
+        <h3><i class="fas fa-list-ul" style="margin-right: 8px;"></i> Itens do documento</h3>
+        <ul id="item-list" class="item-list"></ul>
+        <div id="price-alert-panel" class="price-alert-panel" style="display: none;">
+            <h4><i class="fas fa-chart-line"></i> Alerta de Preço</h4>
+            <div id="price-alert-content"></div>
+        </div>
+    </aside>
+
+    <main class="content">
+        <div class="item-header">
+            <h3 id="item-codigo"><i class="fas fa-barcode" style="margin-right: 8px;"></i>Código: </h3>
+            <button id="btn-validar-item" class="btn btn-primary"><i class="fas fa-check-circle"></i> Validar Item</button>
+        </div>
+        <p id="info-bd" class="info-bd"></p>
+
+        <table class="campos-table">
+            <thead>
+                <tr>
+                    <th>Campo</th>
+                    <th>Dados Digitalizados (OCR)</th>
+                    <th>Base de Dados</th>
+                    <th>Sugestão</th>
+                </tr>
+            </thead>
+            <tbody id="campos-body"></tbody>
+        </table>
+
+        <div id="item-actions" class="item-actions">
+            <button id="btn-guardar" class="btn btn-secondary"><i class="fas fa-save"></i> Guardar Rascunho</button>
+            <button id="btn-cancelar" class="btn btn-danger"><i class="fas fa-times"></i> Cancelar</button>
+        </div>
+    </main>
+</div>
+
+<div id="status-bar" class="status-bar"></div>
+
+<div id="modal-validacao" class="modal">
+    <div class="modal-content">
+        <h3><i class="fas fa-exclamation-triangle" style="color: var(--accent); margin-right: 8px;"></i> <span id="modal-titulo">Atenção</span></h3>
+        <p id="modal-mensagem"></p>
+        <div class="modal-actions">
+            <button id="modal-sim" class="btn btn-primary">Sim</button>
+            <button id="modal-nao" class="btn btn-secondary">Não</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script type="module" src="/validar/static/js/validacao.js"></script>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% macro card(icon, title, content, badge=None, message=None, id=None, extra_classes="", clickable=False) %}
+<div class="card {{ extra_classes }} {% if clickable %}clickable{% endif %}" {% if id %}id="{{ id }}"{% endif %}>
+    <div class="card-icon"><i class="fas fa-{{ icon }}"></i></div>
+    <div class="card-title">{{ title }}</div>
+    <div class="card-info">{{ content | safe }}</div>
+    {% if badge %}<div class="card-badge">{{ badge | safe }}</div>{% endif %}
+    {% if message %}<div class="card-message">{{ message | safe }}</div>{% endif %}
+</div>
+{% endmacro %}

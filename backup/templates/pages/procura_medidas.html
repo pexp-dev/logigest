@@ -1,0 +1,316 @@
+{% extends "base.html" %}
+
+{% block page_title %}Procurar por Medidas{% endblock %}
+
+{% block extra_css %}
+<style>
+  
+    #tabela-resultados tbody tr:hover {
+        background-color: var(--bg-tertiary);
+        cursor: pointer;
+        transition: background-color var(--transition-speed);
+    }    
+
+    .medidas-panel {
+        background: var(--bg-secondary);
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+    }
+
+    .medidas-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr) auto;
+        gap: 1rem;
+        align-items: end;
+    }
+
+    .medida-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+
+    .medida-group label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        opacity: 0.8;
+    }
+
+    .medida-group input {
+        width: 100%;
+        padding: 0.45rem 0.5rem;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        background: var(--bg-input);
+        color: var(--text-primary);
+        font-size: 0.9rem;
+    }
+
+    .tolerancia-opts {
+        display: flex;
+        gap: 0.3rem;
+        align-items: center;
+        margin-top: 0.2rem;
+    }
+
+    .tolerancia-opts select {
+        padding: 0.25rem;
+        font-size: 0.75rem;
+        border-radius: 6px;
+    }
+
+    .tolerancia-opts input {
+        width: 55px;
+        padding: 0.25rem;
+        font-size: 0.75rem;
+        text-align: center;
+    }
+
+    .tolerancia-opts span {
+        font-size: 0.7rem;
+        opacity: 0.7;
+    }
+
+    .btn-pesquisar {
+        background: var(--accent);
+        color: white;
+        border: none;
+        padding: 0.55rem 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        height: fit-content;
+    }
+
+    .btn-limpar {
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--text-primary);
+        padding: 0.55rem 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        height: fit-content;
+        transition: all 0.2s;
+    }
+
+    .btn-limpar:hover {
+        background: rgba(255,255,255,0.05);
+        border-color: var(--accent);
+        color: var(--accent);
+    }
+
+    .botoes-acao {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    .filtros-extra {
+        margin-top: 1rem;
+        border-top: 1px solid var(--border);
+        padding-top: 1rem;
+    }
+
+    .filtros-extra summary {
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--accent);
+        font-size: 0.9rem;
+    }
+
+    .filtros-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.75rem;
+        margin-top: 0.8rem;
+    }
+
+    .filtros-grid select {
+        padding: 0.4rem;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        background: var(--bg-input);
+        font-size: 0.85rem;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+    }
+
+    th, td {
+        padding: 0.6rem;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+        font-size: 0.9rem;
+    }
+
+    th {
+        background: var(--bg-tertiary);
+        cursor: pointer;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        opacity: 0.8;
+        user-select: none;
+    }
+
+    th .sort-icon {
+        margin-left: 5px;
+        font-size: 0.7rem;
+    }
+
+    tr:hover {
+        background: rgba(255,255,255,0.03);
+    }
+
+    .paginacao {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    .paginacao button {
+        padding: 0.3rem 0.6rem;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        background: var(--bg-secondary);
+        cursor: pointer;
+        font-size: 0.8rem;
+    }
+
+    .loading {
+        text-align: center;
+        padding: 2rem;
+    }
+
+    @media (max-width: 900px) {
+        .medidas-row {
+            grid-template-columns: 1fr;
+        }
+        .filtros-grid {
+            grid-template-columns: 1fr;
+        }
+        .botoes-acao {
+            flex-direction: column;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- Título removido -->
+
+<div class="medidas-panel">
+    <div class="medidas-row">
+        <div class="medida-group">
+            <label>X (cm)</label>
+            <input type="number" id="x" tabindex="1" step="0.1" placeholder="Ex: 30">
+            <div class="tolerancia-opts">
+                <select id="modo_x" tabindex="4">
+                    <option value="exato">Exato</option>
+                    <option value="mais">Apenas para cima (+)</option>
+                    <option value="menos">Apenas para baixo (-)</option>
+                    <option value="ambos" selected>Ambos (±)</option>
+                </select>
+                <input type="number" id="margem_x" tabindex="7" value="3" step="1" min="0">
+                <span>cm</span>
+            </div>
+        </div>
+        <div class="medida-group">
+            <label>Y (cm)</label>
+            <input type="number" id="y" tabindex="2" step="0.1" placeholder="Ex: 20">
+            <div class="tolerancia-opts">
+                <select id="modo_y" tabindex="5">
+                    <option value="exato">Exato</option>
+                    <option value="mais">Apenas para cima (+)</option>
+                    <option value="menos">Apenas para baixo (-)</option>
+                    <option value="ambos" selected>Ambos (±)</option>
+                </select>
+                <input type="number" id="margem_y" tabindex="8" value="3" step="1" min="0">
+                <span>cm</span>
+            </div>
+        </div>
+        <div class="medida-group">
+            <label>Z (cm)</label>
+            <input type="number" id="z" tabindex="3" step="0.1" placeholder="Ex: 15">
+            <div class="tolerancia-opts">
+                <select id="modo_z" tabindex="6">
+                    <option value="exato">Exato</option>
+                    <option value="mais">Apenas para cima (+)</option>
+                    <option value="menos">Apenas para baixo (-)</option>
+                    <option value="ambos" selected>Ambos (±)</option>
+                </select>
+                <input type="number" id="margem_z" tabindex="9" value="3" step="1" min="0">
+                <span>cm</span>
+            </div>
+        </div>
+        <div class="botoes-acao">
+            <button id="btn-pesquisar" tabindex="10" class="btn-pesquisar"><i class="fas fa-search"></i> Pesquisar</button>
+            <button id="btn-limpar-filtros" tabindex="11" class="btn-limpar"><i class="fas fa-eraser"></i> Limpar</button>
+                
+    <!-- NOVO: Checkbox para ignorar orientação -->
+    <label style="display: flex; align-items: center; gap: 0.5rem; margin-left: 0.5rem;">
+        <input type="checkbox" id="ignorar-orientacao">
+        <span style="font-size: 0.85rem;">Ignorar orientação</span>
+    </label>
+        </div>
+    </div>
+
+    <details class="filtros-extra">
+        <summary><i class="fas fa-filter"></i> Filtros adicionais (opcional)</summary>
+        <div class="filtros-grid">
+            <select id="filtro_tipo_cartao">
+                <option value="">Todos os tipos de cartão</option>
+            </select>
+            <select id="filtro_modelo">
+                <option value="">Todos os modelos</option>
+            </select>
+            <select id="filtro_linha">
+                <option value="">Todas as linhas</option>
+            </select>
+        </div>
+    </details>
+</div>
+
+<div id="loading" class="loading" style="display: none;">
+    <i class="fas fa-spinner fa-pulse fa-2x"></i>
+</div>
+
+<div id="resultados-container" style="display: none;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3>Resultados <span id="total-resultados"></span></h3>
+        <div class="paginacao" id="paginacao">
+            <button id="btn-anterior" disabled><i class="fas fa-chevron-left"></i> Anterior</button>
+            <span id="info-pagina">Página 1</span>
+            <button id="btn-seguinte" disabled>Seguinte <i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table id="tabela-resultados">
+            <thead>
+                <tr>
+                    <th data-campo="codigo" data-tipo="string">Código</th>
+                    <th data-campo="name" data-tipo="string">Nome</th>
+                    <th data-campo="dimensoes" data-tipo="string">Dimensões (X×Y×Z) (cm)</th>
+                    <th data-campo="tipo_cartao" data-tipo="string">Tipo Cartão</th>
+                    <th data-campo="modelo" data-tipo="string">Modelo</th>
+                    <th data-campo="preco" data-tipo="number">Preço (€)</th>
+                    <th data-campo="ano" data-tipo="number">Ano</th>
+                    <th data-campo="acoes" data-tipo="none">Ações</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="/validar/static/js/procura_medidas.js"></script>
+{% endblock %}

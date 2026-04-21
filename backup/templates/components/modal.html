@@ -1,0 +1,12 @@
+{% macro modal(id, title, message, sim_text="Sim", nao_text="Não", sim_id="modal-sim", nao_id="modal-nao") %}
+<div id="{{ id }}" class="modal">
+    <div class="modal-content">
+        <h3><i class="fas fa-exclamation-triangle" style="color: #ffaa66; margin-right: 8px;"></i> {{ title }}</h3>
+        <p>{{ message | safe }}</p>
+        <div class="modal-actions">
+            <button id="{{ sim_id }}" class="btn btn-primary">{{ sim_text }}</button>
+            <button id="{{ nao_id }}" class="btn btn-secondary">{{ nao_text }}</button>
+        </div>
+    </div>
+</div>
+{% endmacro %}

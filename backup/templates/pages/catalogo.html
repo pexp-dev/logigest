@@ -1,0 +1,152 @@
+{% extends "base_list.html" %}
+
+{% block page_title %}Catálogo{% endblock %}
+
+{% block list_buttons %}
+    <button id="btn-novo" class="btn btn-primary">Novo</button>
+{% endblock %}
+
+{% block filtros_extra %}
+    <label>Linha:</label>
+    <select id="filtro-linha"><option value="">Todas</option></select>
+    <label>Tipo:</label>
+    <select id="filtro-tipo"><option value="">Todos</option></select>
+    <label>Modelo Catálogo:</label>
+    <select id="filtro-modelo-catalogo"><option value="">Todos</option></select>
+    <label>Estado:</label>
+    <select id="filtro-estado"><option value="">Todos</option></select>
+    <label>Completo:</label>
+    <select id="filtro-completo">
+        <option value="">Todos</option>
+        <option value="sim">Sim</option>
+        <option value="nao">Não</option>
+    </select>
+    <label>Correto Odoo:</label>
+    <select id="filtro-correto-odoo">
+        <option value="">Todos</option>
+        <option value="sim">Sim</option>
+        <option value="nao">Não</option>
+    </select>
+    <label>Página (mínimo):</label>
+    <input type="number" id="filtro-pagina-min" placeholder="Min">
+    <label>Página (máximo):</label>
+    <input type="number" id="filtro-pagina-max" placeholder="Max">
+{% endblock %}
+
+{% block colunas_checkboxes %}
+    <label><input type="checkbox" value="id" checked> ID</label>
+    <label><input type="checkbox" value="nome" checked> Nome</label>
+    <label><input type="checkbox" value="dimensoes" checked> Dimensões (cm)</label>
+    <label><input type="checkbox" value="linha" checked> Linha</label>
+    <label><input type="checkbox" value="tipo" checked> Tipo</label>
+    <label><input type="checkbox" value="modelo_catalogo" checked> Modelo Catálogo</label>
+    <label><input type="checkbox" value="estado" checked> Estado</label>
+    <label><input type="checkbox" value="pagina" checked> Pág.</label>
+    <label><input type="checkbox" value="completo" checked> Completo</label>
+    <label><input type="checkbox" value="correto_odoo" checked> Odoo</label>
+    <label><input type="checkbox" value="artigos_associados" checked> Artigos Associados</label>
+    <label><input type="checkbox" value="acoes" checked> Ações</label>
+{% endblock %}
+
+{% block table_headers %}
+    <th data-coluna="id" class="sortable">ID</th>
+    <th data-coluna="nome" class="sortable">Nome</th>
+    <th data-coluna="dimensoes" class="sortable">Dimensões (cm)</th>
+    <th data-coluna="linha" class="sortable">Linha</th>
+    <th data-coluna="tipo" class="sortable">Tipo</th>
+    <th data-coluna="modelo_catalogo" class="sortable">Modelo Catálogo</th>
+    <th data-coluna="estado" class="sortable">Estado</th>
+    <th data-coluna="pagina" class="sortable">Pág.</th>
+    <th data-coluna="completo" class="sortable">Completo</th>
+    <th data-coluna="correto_odoo" class="sortable">Odoo</th>
+    <th>Artigos Associados</th>
+    <th>Ações</th>
+{% endblock %}
+
+{% block list_actions %}
+    <a class="dropdown-item" href="#" id="export-selected"><i class="fas fa-file-excel me-2"></i>Exportar selecionados (CSV)</a>
+    <a class="dropdown-item" href="#" id="export-detalhado"><i class="fas fa-file-excel me-2"></i>Exportar detalhado (Excel)</a>
+    <a class="dropdown-item" href="#" id="export-compostos"><i class="fas fa-file-excel me-2"></i>Exportar compostos (Excel)</a>
+{% endblock %}
+
+{% block form_view %}
+    <!-- O formulário de edição do catálogo (mantém-se exatamente como já tens) -->
+    <div id="view-form" class="view-form hidden container-narrow">
+        <div class="title-with-pagination title-with-checkbox">
+            <label class="checkbox-header">
+                <input type="checkbox" id="catalogo-completo">
+                <span class="badge-completo">Item completo</span>
+            </label>
+            <label class="checkbox-header">
+                <input type="checkbox" id="catalogo-correto-odoo">
+                <span class="badge-odoo">Correto em Odoo</span>
+            </label>
+            <button id="btn-back" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Voltar</button>
+        </div>
+        <form id="form-catalogo">
+            <input type="hidden" id="catalogo-id">
+            <div class="form-group">
+                <label>ID (único)</label>
+                <input type="text" id="catalogo-id-input" required>
+            </div>
+            <div class="form-group">
+                <label>Nome</label>
+                <input type="text" id="catalogo-nome" required>
+            </div>
+            <div class="form-group">
+                <label>Dimensões (cm)</label>
+                <div style="display: flex; gap: 10px;">
+                    <input type="number" id="dim-x" placeholder="X" required>
+                    <input type="number" id="dim-y" placeholder="Y" required>
+                    <input type="number" id="dim-z" placeholder="Z" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Linha</label>
+                <select id="catalogo-linha" required></select>
+            </div>
+            <div class="form-row compact">
+                <div class="form-group">
+                    <label>Tipo</label>
+                    <select id="catalogo-tipo" required></select>
+                </div>
+                <div class="form-group">
+                    <label>Modelo</label>
+                    <select id="catalogo-modelo-catalogo" required></select>
+                </div>
+                <div class="form-group">
+                    <label>Estado</label>
+                    <select id="catalogo-estado" required></select>
+                </div>
+                <div class="form-group">
+                    <label>Página</label>
+                    <input type="number" id="catalogo-pagina" placeholder="Nº">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Artigos Associados (códigos CX...)</label>
+                <div style="display: flex; gap: 5px; position: relative;">
+                    <div class="autocomplete-wrapper" style="flex: 1;">
+                        <input type="text" id="associar-input" placeholder="Código CX..." autocomplete="off">
+                    </div>
+                    <button type="button" id="btn-adicionar-associado" class="btn btn-secondary" style="padding: 0.5rem 1rem;">
+                        <i class="fas fa-plus"></i> Adicionar
+                    </button>
+                </div>
+                <div id="associados-list" class="associations-list"></div>
+            </div>
+            <div class="form-group">
+                <label>Observações</label>
+                <textarea id="catalogo-obs" rows="3"></textarea>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="button" id="cancel-form" class="btn btn-secondary">Cancelar</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block list_extra_js %}
+    <script type="module" src="/validar/static/js/catalogo.js"></script>
+{% endblock %}

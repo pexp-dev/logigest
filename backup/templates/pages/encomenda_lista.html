@@ -1,0 +1,53 @@
+{% extends "base_list.html" %}
+
+{% block page_title %}Encomendas de Cliente{% endblock %}
+
+{% block list_buttons %}
+    <button id="btn-nova" class="btn btn-primary">Novo</button>
+{% endblock %}
+
+{% block filtros_extra %}
+    <label>Cliente:</label>
+    <input type="text" id="filtro-cliente" placeholder="Texto...">
+    <label>Data (início):</label>
+    <input type="date" id="filtro-data-inicio">
+    <label>Data (fim):</label>
+    <input type="date" id="filtro-data-fim">
+    <label>Projeto:</label>
+    <input type="text" id="filtro-projeto" placeholder="Texto...">
+    <label>Ref. Cliente (CRM):</label>
+    <input type="text" id="filtro-ref-cliente" placeholder="Texto...">
+    <label>Observações:</label>
+    <input type="text" id="filtro-obs" placeholder="Texto...">
+{% endblock %}
+
+{% block colunas_checkboxes %}
+    <label><input type="checkbox" value="numero" checked> Nº Encomenda</label>
+    <label><input type="checkbox" value="cliente" checked> Cliente</label>
+    <label><input type="checkbox" value="data" checked> Data</label>
+    <label><input type="checkbox" value="projeto"> Projeto</label>
+    <label><input type="checkbox" value="ref_cliente"> Ref. Cliente</label>
+    <label><input type="checkbox" value="obs"> Observações</label>
+    <label><input type="checkbox" value="total_linhas" checked> Linhas</label>
+    <label><input type="checkbox" value="acoes" checked> Ações</label>
+{% endblock %}
+
+{% block table_headers %}
+    <th data-coluna="numero" class="sortable">Nº Encomenda</th>
+    <th data-coluna="cliente" class="sortable">Cliente</th>
+    <th data-coluna="data" class="sortable">Data</th>
+    <th data-coluna="projeto">Projeto</th>
+    <th data-coluna="ref_cliente">Ref. Cliente</th>
+    <th data-coluna="obs">Observações</th>
+    <th data-coluna="total_linhas" class="sortable">Linhas</th>
+    <th data-coluna="acoes">Ações</th>
+{% endblock %}
+
+{% block list_actions %}
+    <a class="dropdown-item" href="#" id="export-selected"><i class="fas fa-file-excel me-2"></i>Exportar selecionados</a>
+{% endblock %}
+
+{% block list_extra_js %}
+    <script type="module" src="/validar/static/js/encomenda_comum.js"></script>
+    <script type="module" src="/validar/static/js/encomenda_lista.js"></script>
+{% endblock %}

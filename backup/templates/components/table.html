@@ -1,0 +1,26 @@
+{% macro table(headers, rows, actions=False, action_callback=None) %}
+<table class="campos-table">
+    <thead>
+        <tr>
+            {% for header in headers %}
+            <th>{{ header }}</th>
+            {% endfor %}
+            {% if actions %}<th>Ações</th>{% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in rows %}
+        <tr>
+            {% for cell in row %}
+            <td>{{ cell }}</td>
+            {% endfor %}
+            {% if actions %}
+            <td>
+                <button class="btn btn-primary btn-sm" onclick="{{ action_callback(row) }}">Ver</button>
+            </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endmacro %}

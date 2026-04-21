@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Sem título dinâmico -->
+    <title></title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/validar/static/css/styles.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/validar/static/favicon.ico">
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body class="theme-dark">
+
+    <!-- HEADER -->
+    {% block header %}
+    <header class="app-header">
+
+        <!-- LADO ESQUERDO -->
+        <div class="header-left">
+
+            <!-- Ícone Home / Grid -->
+            <a href="/validar/" class="header-icon" id="home-toggle">
+                <i class="fas fa-th-large grid-icon"></i>
+                <i class="fas fa-home home-icon"></i>
+            </a>
+
+            <!-- NAVBAR (só ícones) -->
+            {% include "components/navbar.html" %}
+
+            <!-- TÍTULO DA PÁGINA (aparece depois dos ícones) -->
+            <h1 class="page-title">
+                {% block page_title %}{% endblock %}
+            </h1>
+
+        </div>
+
+        <!-- LADO DIREITO -->
+        <div class="header-right">
+
+            <!-- Menu Opções -->
+            <div class="options-menu">
+                <button id="options-btn" class="options-btn" title="Opções">
+                    <i class="fas fa-ellipsis-v"></i>
+                </button>
+
+                <div id="options-dropdown" class="options-dropdown hidden">
+                    <button id="theme-toggle" class="dropdown-item">
+                        <i class="fas fa-moon"></i> Alternar Tema
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </header>
+    {% endblock %}
+
+    <!-- MAIN -->
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- BOTÃO VOLTAR -->
+    <button id="btn-voltar-global" class="back-button" title="Voltar">
+        <i class="fas fa-arrow-left"></i>
+    </button>
+
+    <!-- SCRIPTS -->
+    <script type="module" src="/validar/static/js/api.js"></script>
+    <script type="module" src="/validar/static/js/utils.js"></script>
+    <script src="/validar/static/js/theme.js" defer></script>
+
+    <!-- SCRIPT INLINE -->
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    /* ============================================================
+       BOTÃO VOLTAR
+    ============================================================ */
+    const btnVoltar = document.getElementById('btn-voltar-global');
+
+    if (btnVoltar) {
+        btnVoltar.addEventListener('click', () => {
+            if (window.history.length <= 1) {
+                window.location.href = '/';
+            } else {
+                window.history.back();
+            }
+        });
+    }
+
+    /* ============================================================
+       MENU OPÇÕES (ícone "...")
+    ============================================================ */
+    const optBtn = document.getElementById("options-btn");
+    const optMenu = document.getElementById("options-dropdown");
+
+    if (optBtn && optMenu) {
+        optBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            optMenu.classList.toggle("hidden");
+        });
+
+        document.addEventListener("click", (e) => {
+            if (!optBtn.contains(e.target) && !optMenu.contains(e.target)) {
+                optMenu.classList.add("hidden");
+            }
+        });
+    }
+
+    /* ============================================================
+       NAVBAR ACTIVE (ícones)
+    ============================================================ */
+    document.querySelectorAll(".icon-nav-btn").forEach(link => {
+        if (link.href === window.location.href) {
+            link.style.color = "var(--accent)";
+        }
+    });
+
+});
+    </script>
+
+    {% block extra_js %}{% endblock %}
+
+</body>
+</html>

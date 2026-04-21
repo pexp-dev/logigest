@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block page_title %}Encomenda{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Estilos específicos do formulário (modais, tabela de linhas, sub‑tabelas) */
+    #modal-pesquisa-universal .modal-content {
+        max-width: min(1400px, 95vw);
+        width: 95%;
+        margin: 1rem auto;
+        padding: 1rem 1.5rem;
+    }
+    #modal-pesquisa-universal .table-wrapper {
+        max-height: 60vh;
+        overflow-y: auto;
+        border: 1px solid var(--border-color);
+        border-radius: 0.375rem;
+    }
+    #tabela-artigos-pesquisa thead th,
+    #tabela-catalogos-pesquisa thead th {
+        position: sticky;
+        top: 0;
+        background-color: var(--bg-tertiary);
+        z-index: 5;
+    }
+    #tabela-linhas {
+        table-layout: fixed;
+        width: 100%;
+        border-collapse: collapse;
+    }
+    #tabela-linhas th,
+    #tabela-linhas td {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        box-sizing: border-box;
+    }
+    #tabela-linhas th:last-child,
+    #tabela-linhas td:last-child {
+        white-space: nowrap;
+        overflow: visible;
+        text-overflow: clip;
+    }
+    .sub-tabela {
+        table-layout: fixed;
+        width: 100%;
+        border-collapse: collapse;
+        background-color: var(--bg-primary);
+    }
+    .sub-tabela th,
+    .sub-tabela td {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        box-sizing: border-box;
+    }
+    .sub-col-artigo { width: 8%; }
+    .sub-col-qtd { width: 5%; }
+    .sub-col-descricao { width: 30%; }
+    .sub-col-vazio { width: 12%; }
+    .sub-col-fornecedor { width: 25%; }
+    .sub-col-ref { width: 10%; }
+    .sub-col-acoes { width: 5%; }
+    .sub-indent {
+        background-color: var(--bg-primary);
+        border-bottom: none;
+    }
+    .sub-linha td:not([colspan]) {
+        border-bottom: none;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- TEMPLATES (os mesmos que já tinhas) -->
+<template id="template-linha-artigo">...</template>
+<!-- ... todos os outros templates ... -->
+
+<!-- FORMULÁRIO (apenas o conteúdo que estava dentro de #view-form) -->
+<div id="view-form" class="view-form">
+    <div class="o_control_panel d-flex flex-wrap align-items-center justify-content-between px-3 pt-2 pb-3">
+        <div class="o_control_panel_breadcrumbs d-flex align-items-center gap-3">
+            <button id="btn-back" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Voltar</button>
+        </div>
+        <div class="o_control_panel_actions d-flex gap-2">
+            <button id="btn-importar-excel" class="btn btn-secondary"><i class="fas fa-file-import"></i> Importar Single</button>
+            <button id="btn-importar-multiplas" class="btn btn-secondary"><i class="fas fa-file-import"></i> Importar Múltiplas (Excel)</button>
+            <button id="btn-guardar" class="btn btn-primary"><i class="fas fa-save"></i> Guardar</button>
+            <button id="btn-cancelar-form" class="btn btn-secondary">Cancelar</button>
+        </div>
+    </div>
+    <div class="o_content">
+        <div class="o_form_sheet_bg">
+            <div class="o_form_sheet position-relative">
+                <!-- Campos do cabeçalho -->
+                <div class="linha-odoo">
+                    <div class="campo campo-nome">
+                        <label>Cliente</label>
+                        <input type="text" id="enc-cliente" class="form-control" placeholder="Ex: Encomenda ABC">
+                    </div>
+                    <div class="campo campo-numero">
+                        <label>Nº</label>
+                        <input type="text" id="enc-numero" class="form-control" placeholder="Nº">
+                    </div>
+                    <div class="campo campo-data">
+                        <label>Data</label>
+                        <input type="date" id="enc-data" class="form-control">
+                    </div>
+                    <div class="campo campo-resto"></div>
+                </div>
+                <!-- ... resto do formulário igual ao que já tens ... -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAIS (excel e pesquisa universal) -->
+<!-- ... -->
+
+{% endblock %}
+
+{% block extra_js %}
+<script type="module" src="/validar/static/js/encomenda_comum.js"></script>
+<script type="module" src="/validar/static/js/encomenda_form.js"></script>
+{% endblock %}

@@ -1,0 +1,479 @@
+{% extends "base.html" %}
+{% block page_title %}Encomendas de Cliente{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* ============================================================
+       ESTILOS ESPECÍFICOS DA PÁGINA DE ENCOMENDAS
+       (complementam o styles.css global)
+       ============================================================ */
+
+    /* Modal de pesquisa universal – mais largo e com tabela rolável */
+    #modal-pesquisa-universal .modal-content {
+        max-width: min(1400px, 95vw);
+        width: 95%;
+        margin: 1rem auto;
+        padding: 1rem 1.5rem;
+    }
+
+    /* Container da tabela de resultados com altura limitada e scroll */
+    #modal-pesquisa-universal .table-wrapper {
+        max-height: 60vh;
+        overflow-y: auto;
+        border: 1px solid var(--border-color);
+        border-radius: 0.375rem;
+    }
+
+    /* Cabeçalho fixo na tabela de pesquisa */
+    #tabela-artigos-pesquisa thead th,
+    #tabela-catalogos-pesquisa thead th {
+        position: sticky;
+        top: 0;
+        background-color: var(--bg-tertiary);
+        z-index: 5;
+    }
+
+    /* Tabela principal do formulário de encomenda */
+    #tabela-linhas {
+        table-layout: fixed;
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    #tabela-linhas th,
+    #tabela-linhas td {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        box-sizing: border-box;
+    }
+
+    /* A coluna de ações não deve truncar */
+    #tabela-linhas th:last-child,
+    #tabela-linhas td:last-child {
+        white-space: nowrap;
+        overflow: visible;
+        text-overflow: clip;
+    }
+
+    /* Sub‑tabelas de catálogo */
+    .sub-tabela {
+        table-layout: fixed;
+        width: 100%;
+        border-collapse: collapse;
+        background-color: var(--bg-primary);
+    }
+
+    .sub-tabela th,
+    .sub-tabela td {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        box-sizing: border-box;
+    }
+
+    /* Larguras específicas para cada coluna da sub‑tabela (opcional, o resize pode sobrepor) */
+    .sub-col-artigo { width: 8%; }
+    .sub-col-qtd { width: 5%; }
+    .sub-col-descricao { width: 30%; }
+    .sub-col-vazio { width: 12%; }
+    .sub-col-fornecedor { width: 25%; }
+    .sub-col-ref { width: 10%; }
+    .sub-col-acoes { width: 5%; }
+
+    /* Células de indentação da sub‑linha */
+    .sub-indent {
+        background-color: var(--bg-primary);
+        border-bottom: none;
+    }
+
+    /* Remove bordas extras nas células de indentação */
+    .sub-linha td:not([colspan]) {
+        border-bottom: none;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- ==================== TEMPLATES (não renderizados) ==================== -->
+
+<!-- Template para linha de artigo (normal) -->
+<template id="template-linha-artigo">
+    <tr>
+        <td class="celula-numero"></td>
+        <td class="celula-ref-cliente"></td>
+        <td class="celula-descricao"></td>
+        <td class="celula-descricao-odoo"></td>
+        <td class="celula-qtd"></td>
+        <td class="celula-artigo-catalogo"></td>
+        <td class="celula-dimensoes"></td>
+        <td class="celula-tag1"></td>
+        <td class="celula-tag2"></td>
+        <td class="celula-acoes">
+            <button class="btn-icon-sm danger btn-remover-linha"><i class="fas fa-trash-alt"></i></button>
+        </td>
+    </tr>
+</template>
+
+<!-- Template para linha de secção -->
+<template id="template-linha-secao">
+    <tr class="linha-secao">
+        <td colspan="9"><strong class="secao-titulo"></strong></td>
+        <td><button class="btn-icon-sm danger btn-remover-linha"><i class="fas fa-trash-alt"></i></button></td>
+    </tr>
+</template>
+
+<!-- Template para linha de nota -->
+<template id="template-linha-nota">
+    <tr class="linha-nota">
+        <td colspan="9"><textarea rows="2" class="nota-textarea"></textarea></td>
+        <td><button class="btn-icon-sm danger btn-remover-linha"><i class="fas fa-trash-alt"></i></button></td>
+    </tr>
+</template>
+
+<!-- Template para a sub‑tabela de catálogo (alinhada a partir de "Descrição Odoo") -->
+<template id="template-subtabela-catalogo">
+    <tr class="sub-linha">
+        <!-- 3 células vazias para indentar -->
+        <td class="sub-indent"></td>
+        <td class="sub-indent"></td>
+        <td class="sub-indent"></td>
+        <!-- As restantes 7 colunas formam a sub‑tabela -->
+        <td colspan="7" style="padding:0;">
+            <table class="sub-tabela" style="width:100%; table-layout:fixed;">
+                <thead>
+                    <tr>
+                        <th data-coluna="sub_artigo" class="sub-col-artigo">Artigo</th>
+                        <th data-coluna="sub_qtd" class="sub-col-qtd">Qtd</th>
+                        <th data-coluna="sub_descricao" class="sub-col-descricao">Descrição</th>
+                        <th data-coluna="sub_vazio" class="sub-col-vazio"></th>
+                        <th data-coluna="sub_fornecedor" class="sub-col-fornecedor">Fornecedor</th>
+                        <th data-coluna="sub_ref" class="sub-col-ref">Ref. Fornecedor</th>
+                        <th data-coluna="sub_acoes" class="sub-col-acoes">
+                            <a href="#" class="add-sub-item-header" style="color: var(--accent); text-decoration: none;">+</a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="sub-tbody"></tbody>
+            </table>
+        </td>
+    </tr>
+</template>
+
+<!-- Template para uma linha da sub‑tabela -->
+<template id="template-sub-linha-item">
+    <tr>
+        <td><input type="text" class="sub-artigo" style="width:100%"></td>
+        <td><input type="number" class="sub-qtd" value="1" style="width:100%"></td>
+        <td><input type="text" class="sub-descricao" style="width:100%"></td>
+        <td></td> <!-- coluna vazia (Dimensões) -->
+        <td><input type="text" class="sub-fornecedor" style="width:100%"></td>
+        <td><input type="text" class="sub-ref" style="width:100%"></td>
+        <td><button class="btn-icon-sm danger remover-sub"><i class="fas fa-trash-alt"></i></button></td>
+    </tr>
+</template>
+
+<!-- Template para o modal de pesquisa de artigos -->
+<template id="template-modal-pesquisa-artigos">
+    <div class="search-container">
+        <input type="text" id="pesquisa-artigos-input" placeholder="Pesquisar por código, nome...">
+        <button id="btn-pesquisar-artigos" class="btn btn-primary">Pesquisar</button>
+    </div>
+    <div id="loading-artigos" style="display:none;"><i class="fas fa-spinner fa-pulse"></i> A carregar...</div>
+    <div class="table-wrapper">
+        <table id="tabela-artigos-pesquisa">
+            <thead><tr><th>Código</th><th>Nome</th><th>Dimensões</th><th>Ação</th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="paginacao">
+        <span id="info-pagina-artigos"></span>
+        <button id="btn-anterior-artigos" disabled>Anterior</button>
+        <button id="btn-seguinte-artigos" disabled>Seguinte</button>
+    </div>
+</template>
+
+<!-- Template para o modal de pesquisa de catálogos -->
+<template id="template-modal-pesquisa-catalogos">
+    <div class="search-container">
+        <input type="text" id="pesquisa-catalogos-input" placeholder="Pesquisar por ID, nome...">
+        <button id="btn-pesquisar-catalogos" class="btn btn-primary">Pesquisar</button>
+    </div>
+    <div id="loading-catalogos" style="display:none;"><i class="fas fa-spinner fa-pulse"></i> A carregar...</div>
+    <div class="table-wrapper">
+        <table id="tabela-catalogos-pesquisa">
+            <thead><tr><th>ID</th><th>Nome</th><th>Dimensões</th><th>Linha</th><th>Ação</th></tr></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="paginacao">
+        <span id="info-pagina-catalogos"></span>
+        <button id="btn-anterior-catalogos" disabled>Anterior</button>
+        <button id="btn-seguinte-catalogos" disabled>Seguinte</button>
+    </div>
+</template>
+
+<!-- ==================== FIM DOS TEMPLATES ==================== -->
+
+<!-- VISTA TABELA (LISTAGEM) -->
+<div id="view-table" class="view-table">
+    {# Painel de controlo (segundo header) #}
+    <div class="o_control_panel d-flex flex-column gap-3 px-3 pt-2 pb-3">
+        <div class="o_control_panel_main d-flex flex-wrap flex-lg-nowrap justify-content-between align-items-center gap-2 gap-lg-3">
+            <div class="o_control_panel_main_buttons d-flex gap-1">
+                <button id="btn-nova" class="btn btn-primary">Novo</button>
+            </div>
+
+            <div class="o_cp_searchview d-flex flex-grow-1 justify-content-center position-relative">
+                <div id="search-bar-wrapper" class="search-container d-flex w-100" style="max-width: 600px;">
+                    <input type="text" id="pesquisa" class="form-control" placeholder="Pesquisar...">
+                    <button id="btn-pesquisar" class="btn btn-primary">Pesquisar</button>
+                    <button id="btn-filtros" class="btn-icon" title="Filtros avançados"><i class="fas fa-filter"></i></button>
+                    <button id="btn-limpar-filtros" class="btn-icon" title="Limpar filtros" style="display: none;"><i class="fas fa-eraser"></i></button>
+                    <button id="btn-colunas" class="btn-icon" title="Escolher colunas"><i class="fas fa-cog"></i></button>
+                </div>
+
+                <div id="selection-panel" class="selection-panel w-100" style="display: none;">
+                    <span><b id="selected-count">0</b> selecionado(s)</span>
+                    <button id="select-all-domain" class="btn btn-info btn-sm hidden"><i class="fas fa-arrow-right"></i> Selecionar todos <span id="total-count-badge" class="badge-total"></span></button>
+                    <button class="btn-link" id="unselect-all" title="Desmarcar todos"><i class="fas fa-times"></i></button>
+                    <div class="dropdown d-inline-block">
+                        <button class="btn btn-secondary" id="actionsDropdownBtn" type="button"><i class="fas fa-cog me-1"></i> Ações <i class="fas fa-caret-down"></i></button>
+                        <div id="actionsDropdownMenu" class="dropdown-menu hidden">
+                            <a class="dropdown-item" href="#" id="export-selected"><i class="fas fa-file-excel me-2"></i>Exportar selecionados</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="o_control_panel_navigation d-flex align-items-center gap-2">
+                <div class="o_pager d-flex align-items-center gap-2">
+                    <span class="o_pager_counter">
+                        <span id="info-pagina" class="fw-bold">1-15</span> / <span id="total-registos">0</span>
+                    </span>
+                    <div class="btn-group">
+                        <button id="btn-anterior" class="btn btn-secondary px-2" disabled><i class="fas fa-chevron-left"></i></button>
+                        <button id="btn-seguinte" class="btn btn-secondary px-2" disabled><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="filtros-dropdown" class="filtros-dropdown hidden">
+            <label>Cliente:</label>
+            <input type="text" id="filtro-cliente" placeholder="Texto...">
+            <label>Data (início):</label>
+            <input type="date" id="filtro-data-inicio">
+            <label>Data (fim):</label>
+            <input type="date" id="filtro-data-fim">
+            <label>Projeto:</label>
+            <input type="text" id="filtro-projeto" placeholder="Texto...">
+            <label>Ref. Cliente (CRM):</label>
+            <input type="text" id="filtro-ref-cliente" placeholder="Texto...">
+            <label>Observações:</label>
+            <input type="text" id="filtro-obs" placeholder="Texto...">
+            <button id="btn-aplicar-filtros" class="btn btn-primary btn-sm mt-2">Aplicar</button>
+        </div>
+    </div>
+
+    <!-- Dropdown de colunas -->
+    <div id="colunas-dropdown" class="colunas-dropdown hidden">
+        <label><input type="checkbox" value="numero" checked> Nº Encomenda</label>
+        <label><input type="checkbox" value="cliente" checked> Cliente</label>
+        <label><input type="checkbox" value="data" checked> Data</label>
+        <label><input type="checkbox" value="projeto"> Projeto</label>
+        <label><input type="checkbox" value="ref_cliente"> Ref. Cliente</label>
+        <label><input type="checkbox" value="obs"> Observações</label>
+        <label><input type="checkbox" value="total_linhas" checked> Linhas</label>
+        <label><input type="checkbox" value="acoes" checked> Ações</label>
+        <button id="aplicar-colunas" class="btn btn-primary btn-sm mt-2">Aplicar</button>
+    </div>
+
+    <!-- Área de conteúdo principal -->
+    <div class="o_content">
+        <div class="o_form_sheet_bg">
+            <div class="o_form_sheet">
+                <div id="loading" style="display: block; text-align: center;"><i class="fas fa-spinner fa-pulse fa-2x"></i></div>
+                <div class="table-wrapper">
+                    <table id="tabela-encomendas" style="display: none;">
+                        <thead>
+                            <tr>
+                                <th class="checkbox-col"><input type="checkbox" id="select-all"></th>
+                                <th data-coluna="numero" class="sortable">Nº Encomenda</th>
+                                <th data-coluna="cliente" class="sortable">Cliente</th>
+                                <th data-coluna="data" class="sortable">Data</th>
+                                <th data-coluna="projeto">Projeto</th>
+                                <th data-coluna="ref_cliente">Ref. Cliente</th>
+                                <th data-coluna="obs">Observações</th>
+                                <th data-coluna="total_linhas" class="sortable">Linhas</th>
+                                <th data-coluna="acoes">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="paginacao" id="paginacao" style="display: none;">
+                    <span id="info-pagina"></span>
+                    <button id="btn-anterior" disabled>Anterior</button>
+                    <button id="btn-seguinte" disabled>Seguinte</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- VISTA FORMULÁRIO (EDIÇÃO/CRIAÇÃO) -->
+<div id="view-form" class="view-form hidden">
+    <div class="o_control_panel d-flex flex-wrap align-items-center justify-content-between px-3 pt-2 pb-3">
+        <div class="o_control_panel_breadcrumbs d-flex align-items-center gap-3">
+            <button id="btn-back" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Voltar</button>
+        </div>
+        <div class="o_control_panel_actions d-flex gap-2">
+            <button id="btn-importar-excel" class="btn btn-secondary"><i class="fas fa-file-import"></i> Importar Single</button>
+            <button id="btn-importar-multiplas" class="btn btn-secondary"><i class="fas fa-file-import"></i> Importar Múltiplas (Excel)</button>
+            <button id="btn-guardar" class="btn btn-primary"><i class="fas fa-save"></i> Guardar</button>
+            <button id="btn-cancelar-form" class="btn btn-secondary">Cancelar</button>
+        </div>
+    </div>
+    <div class="o_content">
+        <div class="o_form_sheet_bg">
+            <div class="o_form_sheet position-relative">
+                <div class="o_statusbar d-flex justify-content-between mb-3">
+                    <div class="o_statusbar_status d-flex">
+                        <button type="button" class="btn btn-secondary o_arrow_button o_first" disabled>Rascunho</button>
+                        <button type="button" class="btn btn-secondary o_arrow_button" disabled>Confirmado</button>
+                        <button type="button" class="btn btn-secondary o_arrow_button o_last" disabled>Enviado</button>
+                    </div>
+                    <div class="o_statusbar_buttons"></div>
+                </div>
+
+                <div class="linha-odoo">
+                    <div class="campo campo-nome">
+                        <label>Cliente</label>
+                        <input type="text" id="enc-cliente" class="form-control" placeholder="Ex: Encomenda ABC">
+                    </div>
+                    <div class="campo campo-numero">
+                        <label>Nº </label>
+                        <input type="text" id="enc-numero" class="form-control" placeholder="Nº">
+                    </div>
+                    <div class="campo campo-data">
+                        <label>Data</label>
+                        <input type="date" id="enc-data" class="form-control">
+                    </div>
+                    <div class="campo campo-resto"></div>
+                </div>
+
+                <div class="linha-odoo">
+                    <div class="campo campo-projeto">
+                        <label>Projeto</label>
+                        <input type="text" id="enc-projeto" class="form-control">
+                    </div>
+                    <div class="campo campo-ref">
+                        <label>Referência Cliente</label>
+                        <input type="text" id="enc-ref-cliente" class="form-control">
+                    </div>
+                    <div class="campo campo-resto"></div>
+                </div>
+
+                <div class="campo campo-obs" style="margin-top: 0.5rem;">
+                    <label>Observações</label>
+                    <textarea id="enc-obs" rows="2" class="form-control"></textarea>
+                </div>
+
+                <div class="o_notebook mt-4">
+                    <div class="nav nav-tabs o_notebook_tabs" role="tablist">
+                        <button class="nav-link active" id="notebook-linhas-tab" data-bs-toggle="tab" data-bs-target="#notebook-linhas" type="button" role="tab" aria-controls="notebook-linhas" aria-selected="true">Linhas da Encomenda</button>
+                        <button class="nav-link" id="notebook-outros-tab" data-bs-toggle="tab" data-bs-target="#notebook-outros" type="button" role="tab" aria-controls="notebook-outros" aria-selected="false">Outra Informação</button>
+                        <button class="nav-link" id="notebook-logistics-tab" data-bs-toggle="tab" data-bs-target="#notebook-logistics" type="button" role="tab" aria-controls="notebook-logistics" aria-selected="false">Logistics</button>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="notebook-linhas" role="tabpanel" aria-labelledby="notebook-linhas-tab">
+                            <div class="linhas-table-wrapper">
+                                <table class="linhas-table" id="tabela-linhas">
+                                    <thead>
+                                        <tr>
+                                            <th data-coluna="numero" style="width: 40px;">#</th>
+                                            <th data-coluna="ref_cliente">Ref. Cliente</th>
+                                            <th data-coluna="descricao">Descrição</th>
+                                            <th data-coluna="descricao_odoo">Descrição Odoo</th>
+                                            <th data-coluna="qtd" style="width: 70px;">Qtd</th>
+                                            <th data-coluna="artigo">Artigo</th>
+                                            <th data-coluna="dimensoes">Dimensões</th>
+                                            <th data-coluna="tag1">Tag1</th>
+                                            <th data-coluna="tag2">Tag2</th>
+                                            <th data-coluna="acoes" style="width: 60px;">Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="linhas-tbody"></tbody>
+                                </table>
+                            </div>
+                            <div class="o_list_buttons">
+                                <a href="#" id="add-artigo">Adicionar um artigo</a>
+                                <a href="#" id="add-secao">Adicionar uma secção</a>
+                                <a href="#" id="add-nota">Adicionar uma nota</a>
+                                <a href="#" id="add-catalogo">Catálogo</a>
+                            </div>
+                            <div class="o_group row mt-3">
+                                <div class="col-lg-8"></div>
+                                <div class="col-lg-4">
+                                    <div class="oe_subtotal_footer d-flex flex-column">
+                                        <table class="float-end">
+                                            <tbody>
+                                                <tr><td class="o_td_label">Valor sem Impostos</td><td class="o_list_monetary"><span id="subtotal-sem-impostos">0,00 €</span></td></tr>
+                                                <tr><td class="o_td_label">IVA 23%</td><td class="o_list_monetary"><span id="total-iva">0,00 €</span></td></tr>
+                                                <tr><td class="o_td_label">Total</td><td class="o_list_monetary"><span id="total-geral" style="font-weight:bold;">0,00 €</span></td></tr>
+                                                <tr><td class="o_td_label">Margem</td><td class="o_list_monetary"><span id="margem">0,00 €</span> (<span id="margem-percent">0%</span>)</td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="notebook-outros" role="tabpanel" aria-labelledby="notebook-outros-tab"></div>
+                        <div class="tab-pane" id="notebook-logistics" role="tabpanel" aria-labelledby="notebook-logistics-tab"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal importar Excel -->
+<div id="modal-excel" class="modal">
+    <div class="modal-content">
+        <h3>Importar Excel</h3>
+        <p>Selecione um ficheiro Excel (.xlsx).</p>
+        <input type="file" id="excel-file" accept=".xlsx, .xls">
+        <div class="modal-actions">
+            <button id="importar-confirm" class="btn btn-primary">Importar</button>
+            <button id="importar-cancel" class="btn btn-secondary">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal universal para pesquisa de artigos/catálogos -->
+<div id="modal-pesquisa-universal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><i class="fas fa-search"></i> Pesquisar <span id="modal-pesquisa-titulo">Artigos</span></h3>
+            <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="tabs-pesquisa">
+                <button id="tab-artigos" class="tab-btn active">Artigos</button>
+                <button id="tab-catalogos" class="tab-btn">Catálogos</button>
+            </div>
+            <div id="pesquisa-universal-container"></div>
+        </div>
+        <div class="modal-footer">
+            <button id="btn-fechar-pesquisa" class="btn btn-secondary">Cancelar</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script type="module" src="/validar/static/js/encomenda_comum.js"></script>
+<script type="module" src="/validar/static/js/encomenda_lista.js"></script>
+<script type="module" src="/validar/static/js/encomenda_form.js"></script>
+{% endblock %}

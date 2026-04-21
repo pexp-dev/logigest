@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+
+{% block title %}Artigo {{ artigo.codigo }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    .form-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .header-artigo {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    .form-actions {
+        display: none;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    .form-actions.visible {
+        display: flex;
+    }
+    .chart-container.large {
+        height: 400px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="header-artigo">
+    <h1> Artigo {{ artigo.codigo }}</h1>
+    <button id="btn-exportar-artigo" class="btn btn-primary">
+        <i class="fas fa-file-excel"></i> Exportar Excel
+    </button>
+</div>
+
+<form id="form-artigo" class="form-grid">
+    <input type="hidden" id="artigo-codigo" value="{{ artigo.codigo }}">
+
+    <div class="linha-flex">
+        <div class="campo pequeno">
+            <label>Código:</label>
+            <div class="campo-leitura">{{ artigo.codigo }}</div>
+        </div>
+        <div class="campo flex-grow">
+            <label>Fornecedor (seller):</label>
+            <div class="campo-leitura">{{ artigo.seller_product_name }}</div>
+        </div>
+        <div class="campo pequeno">
+            <label>Categoria:</label>
+            <input type="text" name="categoria" value="{{ artigo.categoria or '' }}">
+        </div>
+        <div class="campo pequeno">
+            <label>Estado:</label>
+            <select name="estado" data-dicionario="estado" data-valor="{{ artigo.estado or '' }}">
+                <option value="">--</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="campo">
+        <label>Nome:</label>
+        <input type="text" name="name" value="{{ artigo.name or '' }}">
+    </div>
+
+    <div class="campo">
+        <label>Descrição:</label>
+        <input type="text" name="descricao"
+               value="{{ artigo.oficial.descricao if artigo.oficial else '' }}">
+    </div>
+
+    <div class="campo">
+        <label>Dimensões:</label>
+        <div class="dimensoes">
+            <input type="text" name="dimensao_x" placeholder="X"
+                value="{{ artigo.oficial.dimensoes.x if artigo.oficial and artigo.oficial.dimensoes else '' }}">
+            <input type="text" name="dimensao_y" placeholder="Y"
+                value="{{ artigo.oficial.dimensoes.y if artigo.oficial and artigo.oficial.dimensoes else '' }}">
+            <input type="text" name="dimensao_z" placeholder="Z"
+                value="{{ artigo.oficial.dimensoes.z if artigo.oficial and artigo.oficial.dimensoes else '' }}">
+        </div>
+    </div>
+
+    <div class="linha-flex">
+        <div class="campo flex-grow">
+            <label>Tipo:</label>
+            <select name="tipo" data-dicionario="tipo" data-valor="{{ artigo.tipo or '' }}">
+                <option value="">-- Selecionar --</option>
+            </select>
+        </div>
+        <div class="campo flex-grow">
+            <label>Linha:</label>
+            <select name="linha" data-dicionario="linha" data-valor="{{ artigo.linha or '' }}">
+                <option value="">-- Selecionar --</option>
+            </select>
+        </div>
+        <div class="campo flex-grow">
+            <label>Tipo de Medida:</label>
+            <select name="modelo_catalogo" data-dicionario="modelo_catalogo" data-valor="{{ artigo.modelo_catalogo or '' }}">
+                <option value="">-- Selecionar --</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="campo">
+        <label>Observações:</label>
+        <textarea name="obs">{{ artigo.obs or '' }}</textarea>
+    </div>
+
+    <div id="form-actions" class="form-actions">
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-save"></i> Guardar
+        </button>
+        <button type="button" id="btn-cancelar" class="btn btn-secondary">
+            <i class="fas fa-times"></i> Cancelar
+        </button>
+    </div>
+</form>
+
+<div id="ocorrencias-header" class="card-header">
+    <h2>Ocorrências ({{ artigo.ocorrencias|length }})</h2>
+    <i class="fas fa-chevron-down"></i>
+</div>
+<div id="ocorrencias-content" class="card-content collapsed">
+    <table>
+        <thead>
+            <tr>
+                <th>Documento</th>
+                <th>Data</th>
+                <th>Quantidade</th>
+                <th>Preço unit.</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for occ in artigo.ocorrencias %}
+            <tr>
+                <td>{{ occ.documento }}</td>
+                <td>{{ occ.data }}</td>
+                <td>{{ occ.quantidade }}</td>
+                <td>{{ occ.preco_unit }}</td>
+                <td>{{ occ.total }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<h2>Análise por ano</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 20px;">
+    <div class="chart-container" style="flex: 1; min-width: 250px;">
+        <canvas id="chart-quantidade"></canvas>
+    </div>
+    <div class="chart-container" style="flex: 1; min-width: 250px;">
+        <canvas id="chart-valor"></canvas>
+    </div>
+    <div class="chart-container" style="flex: 1; min-width: 250px;">
+        <canvas id="chart-preco-medio"></canvas>
+    </div>
+</div>
+
+<h2>Preço unitário vs Quantidade</h2>
+<div class="chart-container large">
+    <canvas id="chart-quantidade-preco"></canvas>
+</div>
+
+<div style="margin-top: 20px;">
+    <div id="status-bar" class="status-bar"></div>
+</div>
+
+<script id="artigo-data" type="application/json">
+    {{ artigo | tojson | safe }}
+</script>
+{% endblock %}
+
+{% block extra_js %}
+<script type="module" src="/validar/static/js/artigo.js"></script>
+{% endblock %}

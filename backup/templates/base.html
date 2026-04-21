@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
+    <link rel="stylesheet" href="/validar/static/css/styles.css">
+    <link rel="icon" type="image/x-icon" href="/validar/static/favicon.ico">
+
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body class="theme-dark">
+
+    {% block header %}
+    <header class="app-header">
+
+        <div class="header-inner">
+            <div class="header-left">
+                <a href="/validar/" class="header-icon" id="home-toggle">
+                    <i class="fas fa-th-large grid-icon"></i>
+                    <i class="fas fa-home home-icon"></i>
+                </a>
+                {% include "components/navbar.html" %}
+                <h1 class="page-title">{% block page_title %}{% endblock %}</h1>
+            </div>
+
+            <div class="header-right">
+                <div class="options-menu">
+                    <button id="options-btn" class="options-btn" title="Opções">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                    <div id="options-dropdown" class="options-dropdown hidden">
+                        <button id="theme-toggle" class="dropdown-item">
+                            <i class="fas fa-moon"></i> Alternar Tema
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bloco para segundo header (painel de controlo) -->
+        <div class="sub-header">
+            {% block subheader %}{% endblock %}
+        </div>
+
+    </header>
+    {% endblock %}
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <button id="btn-voltar-global" class="back-button" title="Voltar">
+        <i class="fas fa-arrow-left"></i>
+    </button>
+
+    <script type="module" src="/validar/static/js/api.js"></script>
+    <script type="module" src="/validar/static/js/utils.js"></script>
+    <script src="/validar/static/js/theme.js" defer></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnVoltar = document.getElementById('btn-voltar-global');
+            if (btnVoltar) {
+                btnVoltar.addEventListener('click', () => {
+                    if (window.history.length <= 1) window.location.href = '/';
+                    else window.history.back();
+                });
+            }
+
+            const optBtn = document.getElementById("options-btn");
+            const optMenu = document.getElementById("options-dropdown");
+            if (optBtn && optMenu) {
+                optBtn.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    optMenu.classList.toggle("hidden");
+                });
+                document.addEventListener("click", (e) => {
+                    if (!optBtn.contains(e.target) && !optMenu.contains(e.target)) {
+                        optMenu.classList.add("hidden");
+                    }
+                });
+            }
+
+            document.querySelectorAll(".icon-nav-btn").forEach(link => {
+                if (link.href === window.location.href) {
+                    link.style.color = "var(--accent)";
+                }
+            });
+        });
+    </script>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

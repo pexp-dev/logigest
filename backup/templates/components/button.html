@@ -1,0 +1,6 @@
+{% macro button(text, icon=None, type="button", variant="secondary", id=None, extra_classes="", disabled=False) %}
+<button type="{{ type }}" class="btn btn-{{ variant }} {{ extra_classes }}" {% if id %}id="{{ id }}"{% endif %} {% if disabled %}disabled{% endif %}>
+    {% if icon %}<i class="fas fa-{{ icon }}"></i>{% endif %}
+    {{ text }}
+</button>
+{% endmacro %}

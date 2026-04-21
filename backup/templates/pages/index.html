@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Validação de Faturas - Início{% endblock %}
+
+{% block extra_css %}
+<!-- Não há estilos específicos; todos estão no global -->
+{% endblock %}
+
+{% block header_actions %}
+{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="card" id="card-validar">
+        <div class="card-icon"><i class="fas fa-clipboard-list"></i></div>
+        <div class="card-title">Validar</div>
+        <div class="card-info" id="pendente-info">A carregar...</div>
+        <div id="pendente-badge" class="card-badge" style="display: none;"></div>
+        <div id="validar-mensagem" class="card-message"></div>
+    </div>
+
+    <div class="card" id="card-upload">
+        <div class="card-icon"><i class="fas fa-upload"></i></div>
+        <div class="card-title">Upload</div>
+        <div class="card-info">Carregar nova fatura</div>
+        <div id="upload-mensagem" class="card-message"></div>
+    </div>
+
+    <div class="card" id="card-exportar">
+        <div class="card-icon"><i class="fas fa-file-export"></i></div>
+        <div class="card-title">Exportar</div>
+        <div class="card-info" id="exportar-info">A carregar...</div>
+        <div id="exportar-badge" class="card-badge" style="display: none;"></div>
+        <div id="exportar-mensagem" class="card-message"></div>
+    </div>
+
+    <div class="card" id="card-base">
+        <div class="card-icon"><i class="fas fa-database"></i></div>
+        <div class="card-title">Base de Dados</div>
+        <div class="card-info">Pesquisar e gerir artigos</div>
+        <div id="base-mensagem" class="card-message"></div>
+    </div>
+
+    <!-- NOVO CARD: Catálogo -->
+    <div class="card" id="card-catalogo">
+        <div class="card-icon"><i class="fas fa-book"></i></div>
+        <div class="card-title">Catálogo</div>
+        <div class="card-info">Gerir itens de catálogo</div>
+        <div id="catalogo-mensagem" class="card-message"></div>
+    </div>
+    
+    <div class="card" id="card-medidas">
+        <div class="card-icon"><i class="fas fa-ruler-combined"></i></div>
+        <div class="card-title">Procurar</div>
+        <div class="card-info">Pesquisa com tolerâncias X, Y, Z</div>
+   </div>
+    
+</div>
+
+<div id="modal-ja-processado" class="modal">
+    <div class="modal-content">
+        <h3><i class="fas fa-exclamation-triangle" style="color: var(--accent); margin-right: 8px;"></i> Documento já processado</h3>
+        <p id="modal-mensagem"></p>
+        <div class="modal-actions">
+            <button id="modal-sim" class="btn btn-primary">Sim, processar novamente</button>
+            <button id="modal-nao" class="btn btn-secondary">Não, cancelar</button>
+        </div>
+    </div>
+</div>
+
+<div id="toast" class="toast-message"></div>
+
+<input type="file" id="hidden-file-input" accept=".pdf" style="display: none;">
+{% endblock %}
+
+{% block extra_js %}
+<script type="module" src="/validar/static/js/index.js"></script>
+{% endblock %}

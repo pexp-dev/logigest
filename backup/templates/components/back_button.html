@@ -1,0 +1,12 @@
+{% from "components/button.html" import button %}
+
+{% macro back_button(id="btn-voltar", extra_classes="", disabled=False) %}
+    {{ button(
+        text="Voltar",
+        icon="arrow-left",
+        variant="voltar",
+        id=id,
+        extra_classes=extra_classes,
+        disabled=disabled
+    ) }}
+{% endmacro %}

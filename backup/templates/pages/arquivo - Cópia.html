@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% block page_title %}Documentos Arquivados{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Garantir que a tabela ocupa toda a largura */
+    #arquivos-container table {
+        width: 100%;
+    }
+    /* Linha com título e paginação */
+    .title-with-pagination {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    .title-with-pagination .paginacao {
+        margin: 0;
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+    /* Hover nas linhas da tabela */
+    #arquivos-container table tbody tr:hover {
+        background-color: var(--bg-tertiary);
+        cursor: pointer;
+    }
+    /* Ajuste para o container da tabela não ter padding extra */
+    .container {
+        max-width: 1700px;
+    }
+    /* Badge "Novo" igual ao da Base de Dados */
+    .badge-novo {
+        display: inline-block;
+        background-color: var(--success-bg);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 2rem;
+        font-size: 0.7rem;
+        font-weight: 500;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+    }
+    /* Dropdowns de colunas/filtros (já vêm do CSS global, mas garantimos) */
+    .colunas-dropdown {
+        position: absolute;
+        right: 0;
+        top: 2.8125rem;
+        background-color: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: 0.25rem;
+        padding: var(--spacing-md);
+        z-index: 1000;
+        min-width: 13.75rem;
+        box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.5);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .colunas-dropdown label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        white-space: nowrap;
+    }
+    .filtros-dropdown {
+        position: absolute;
+        left: 0;
+        top: 2.8125rem;
+        background-color: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        border-radius: 0.25rem;
+        padding: var(--spacing-md);
+        z-index: 1000;
+        min-width: 13.75rem;
+        box-shadow: 0 0.25rem 0.75rem rgba(0,0,0,0.5);
+    }
+    .filtros-dropdown label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--text-secondary);
+        font-size: 0.85rem;
+    }
+    .filtros-dropdown select, .filtros-dropdown input {
+        width: 100%;
+        padding: 0.3125rem;
+        margin-bottom: 0.625rem;
+        background-color: var(--bg-input);
+        border: 1px solid var(--border-color);
+        color: var(--text-primary);
+        border-radius: 0.25rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+    <!-- Título removido (está no header) + paginação alinhada à direita -->
+    <div class="title-with-pagination">
+        <div class="paginacao" id="paginacao" style="display: none;">
+            <span id="info-pagina">Página 1 de 1</span>
+            <button id="btn-anterior" disabled><i class="fas fa-chevron-left"></i> Anterior</button>
+            <button id="btn-seguinte" disabled>Seguinte <i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <!-- Barra de pesquisa (igual à Base de Dados) -->
+    <div class="search-container" id="search-container">
+        <div id="search-bar" style="display: flex; gap: 10px; flex: 1;">
+            <input type="text" id="pesquisa" placeholder="Pesquisar por documento, data ou total...">
+            <button id="btn-pesquisar" class="btn btn-primary">Pesquisar</button>
+            <button id="btn-filtros" class="btn-icon" title="Filtros avançados">
+                <i class="fas fa-filter"></i>
+            </button>
+            <button id="btn-limpar-filtros" class="btn-icon" title="Limpar filtros" style="display: none;">
+                <i class="fas fa-eraser"></i>
+            </button>
+            <button id="btn-colunas" class="btn-icon" title="Escolher colunas">
+                <i class="fas fa-cog"></i>
+            </button>
+        </div>
+
+        <!-- Painel de seleção (aparece quando há itens selecionados) -->
+        <div id="selection-panel" class="selection-panel" style="display: none;">
+            <span><b id="selected-count">0</b> selecionado(s)</span>
+            <button id="select-all-domain" class="btn btn-info btn-sm hidden">
+                <i class="fas fa-arrow-right"></i> Selecionar todos <span id="total-count-badge" class="badge-total"></span>
+            </button>
+            <button class="btn-link" id="unselect-all" title="Desmarcar todos"><i class="fas fa-times"></i></button>
+            <div class="dropdown d-inline-block">
+                <button class="btn btn-secondary" id="actionsDropdownBtn" type="button">
+                    <i class="fas fa-cog me-1"></i> Ações <i class="fas fa-caret-down"></i>
+                </button>
+                <div id="actionsDropdownMenu" class="dropdown-menu hidden">
+                    <a class="dropdown-item" href="#" id="export-selected"><i class="fas fa-file-excel me-2"></i>Exportar selecionados</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dropdown de filtros (inicializado pelo JS) -->
+    <div id="filtros-dropdown" class="filtros-dropdown hidden"></div>
+
+    <!-- Dropdown de colunas (inicializado pelo JS) -->
+    <div id="colunas-dropdown" class="colunas-dropdown hidden"></div>
+
+    <!-- Loading e container da tabela -->
+    <div id="loading" style="display: block; text-align: center; margin: 20px 0;">
+        <i class="fas fa-spinner fa-pulse fa-2x" style="color: var(--accent);"></i>
+    </div>
+    <div id="arquivos-container"></div>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="/validar/static/js/arquivo.js"></script>
+{% endblock %}

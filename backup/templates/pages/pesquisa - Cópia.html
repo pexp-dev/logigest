@@ -1,0 +1,196 @@
+{% extends "base.html" %}
+
+{% block page_title %}Base de Dados{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Hover nas linhas da tabela de resultados */
+    #resultados tbody tr:hover {
+        background-color: var(--bg-tertiary);
+        cursor: pointer;
+        transition: background-color var(--transition-speed);
+    }
+    
+    /* Container para título e paginação na mesma linha */
+    .title-with-pagination {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    /* Ajuste da paginação para não ter margens extras */
+    .title-with-pagination .paginacao {
+        margin: 0;
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+    
+    /* Esconder a paginação antiga que estava em baixo */
+    .paginacao-footer {
+        display: none !important;
+    }
+
+    /* Estilo opcional para o botão limpar */
+    #btn-limpar-filtros:hover {
+        color: var(--danger-bg);
+    }
+</style>
+{% endblock %}
+
+{% block header_actions %}
+{% endblock %}
+
+{% block content %}
+<!-- Título e paginação na mesma linha -->
+<div class="title-with-pagination">
+    <!-- Título removido -->
+    <div class="paginacao" id="paginacao" style="display: none;">
+        <span id="info-pagina">Página 1 de 1</span>
+        <button id="btn-anterior" disabled><i class="fas fa-chevron-left"></i> Anterior</button>
+        <button id="btn-seguinte" disabled>Seguinte <i class="fas fa-chevron-right"></i></button>
+    </div>
+</div>
+
+<div class="search-container" id="search-container">
+    <div id="search-bar" style="display: flex; gap: 10px; flex: 1;">
+        <input type="text" id="pesquisa" placeholder="Pesquisar por código, nome, descrição, nome do vendedor ou observações...">
+        <button id="btn-pesquisar" class="btn btn-primary">Pesquisar</button>
+        <button id="btn-filtros" class="btn-icon" title="Filtros avançados">
+            <i class="fas fa-filter"></i>
+        </button>
+        <button id="btn-limpar-filtros" class="btn-icon" title="Limpar filtros" style="display: none;">
+            <i class="fas fa-eraser"></i>
+        </button>
+        <button id="btn-colunas" class="btn-icon" title="Escolher colunas">
+            <i class="fas fa-cog"></i>
+        </button>
+    </div>
+
+    <div id="selection-panel" class="selection-panel">
+        <span><b id="selected-count">0</b> selecionado(s)</span>
+        <button id="select-all-domain" class="btn btn-info btn-sm hidden">
+            <i class="fas fa-arrow-right"></i> Selecionar todos <span id="total-count-badge" class="badge-total"></span>
+        </button>
+        <button class="btn-link" id="unselect-all" title="Desmarcar todos"><i class="fas fa-times"></i></button>
+        <div class="dropdown d-inline-block">
+            <button class="btn btn-secondary" id="actionsDropdownBtn" type="button">
+                <i class="fas fa-cog me-1"></i> Ações <i class="fas fa-caret-down"></i>
+            </button>
+            <div id="actionsDropdownMenu" class="dropdown-menu hidden">
+                <a class="dropdown-item" href="#" id="export-selected"><i class="fas fa-file-excel me-2"></i>Exportar selecionados</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="filtros-dropdown" class="filtros-dropdown hidden">
+    <label>Categoria:</label>
+    <select id="filtro-categoria">
+        <option value="">Todas</option>
+    </select>
+    <label>Linha:</label>
+    <select id="filtro-linha">
+        <option value="">Todas</option>
+    </select>
+    <label>Tipo:</label>
+    <select id="filtro-tipo">
+        <option value="">Todos</option>
+    </select>
+    <label>Modelo Catálogo:</label>
+    <select id="filtro-modelo-catalogo">
+        <option value="">Todos</option>
+    </select>
+    <label>Estado:</label>
+    <select id="filtro-estado">
+        <option value="">Todos</option>
+    </select>
+    <label>Nome do Vendedor:</label>
+    <input type="text" id="filtro-seller-product-name" placeholder="Texto...">
+    <label>Observações:</label>
+    <input type="text" id="filtro-obs" placeholder="Texto...">
+    <label>Modelo (oficial):</label>
+    <input type="text" id="filtro-modelo" placeholder="Texto...">
+    <label>Tipo Cartão:</label>
+    <select id="filtro-tipo-cartao">
+        <option value="">Todos</option>
+    </select>
+    <label>Dimensão X (mm):</label>
+    <input type="number" id="filtro-dimensao-x" placeholder="Exato" step="1">
+    <label>Dimensão Y (mm):</label>
+    <input type="number" id="filtro-dimensao-y" placeholder="Exato" step="1">
+    <label>Dimensão Z (mm):</label>
+    <input type="number" id="filtro-dimensao-z" placeholder="Exato" step="1">
+    <label>Última Fatura:</label>
+    <input type="text" id="filtro-ultima-fatura" placeholder="Texto...">
+    <button id="btn-aplicar-filtros" class="btn btn-primary btn-sm">Aplicar filtros</button>
+</div>
+
+<div id="colunas-dropdown" class="colunas-dropdown hidden">
+    <label><input type="checkbox" value="codigo" checked> Código</label>
+    <label><input type="checkbox" value="name" checked> Nome</label>
+    <label><input type="checkbox" value="descricao" checked> Descrição</label>
+    <label><input type="checkbox" value="categoria"> Categoria</label>
+    <label><input type="checkbox" value="linha"> Linha</label>
+    <label><input type="checkbox" value="tipo"> Tipo</label>
+    <label><input type="checkbox" value="modelo_catalogo"> Modelo Catálogo</label>
+    <label><input type="checkbox" value="estado"> Estado</label>
+    <label><input type="checkbox" value="preco_unit"> Preço unit.</label>
+    <label><input type="checkbox" value="quantidade_vs_preco"> Qtd vs Preço</label>
+    <label><input type="checkbox" value="ultimo_preco"> Último preço</label>
+    <label><input type="checkbox" value="ultimo_ano"> Último ano</label>
+    <label><input type="checkbox" value="seller_product_name"> Nome do Vendedor</label>
+    <label><input type="checkbox" value="obs"> Observações</label>
+    <label><input type="checkbox" value="modelo"> Modelo (oficial)</label>
+    <label><input type="checkbox" value="tipo_cartao"> Tipo Cartão</label>
+    <label><input type="checkbox" value="dimensao_x"> Dimensão X</label>
+    <label><input type="checkbox" value="dimensao_y"> Dimensão Y</label>
+    <label><input type="checkbox" value="dimensao_z"> Dimensão Z</label>
+    <label><input type="checkbox" value="ultima_fatura"> Última Fatura</label>
+    <label><input type="checkbox" value="acoes" checked> Ações</label>
+    <button id="aplicar-colunas" class="btn btn-primary btn-sm">Aplicar</button>
+</div>
+
+<div id="loading" style="display: block; text-align: center; margin: 20px 0;">
+    <i class="fas fa-spinner fa-pulse fa-2x" style="color: var(--accent);"></i>
+</div>
+
+<table id="resultados" style="display: none;">
+    <thead>
+        <tr>
+            <th class="checkbox-col"><input type="checkbox" id="select-all"></th>
+            <th data-coluna="codigo">Código</th>
+            <th data-coluna="name">Nome</th>
+            <th data-coluna="descricao">Descrição</th>
+            <th data-coluna="categoria">Categoria</th>
+            <th data-coluna="linha">Linha</th>
+            <th data-coluna="tipo">Tipo</th>
+            <th data-coluna="modelo_catalogo">Modelo Catálogo</th>
+            <th data-coluna="estado">Estado</th>
+            <th data-coluna="preco_unit">Preço unit.</th>
+            <th data-coluna="quantidade_vs_preco">Qtd vs Preço</th>
+            <th data-coluna="ultimo_preco">Último preço</th>
+            <th data-coluna="ultimo_ano">Último ano</th>
+            <th data-coluna="seller_product_name">Nome do Vendedor</th>
+            <th data-coluna="obs">Observações</th>
+            <th data-coluna="modelo">Modelo</th>
+            <th data-coluna="tipo_cartao">Tipo Cartão</th>
+            <th data-coluna="dimensao_x">Dimensão X</th>
+            <th data-coluna="dimensao_y">Dimensão Y</th>
+            <th data-coluna="dimensao_z">Dimensão Z</th>
+            <th data-coluna="ultima_fatura">Última Fatura</th>
+            <th data-coluna="acoes">Ações</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<!-- Div antiga da paginação removida (já não existe) -->
+{% endblock %}
+
+{% block extra_js %}
+<script src="/validar/static/js/pesquisa.js"></script>
+{% endblock %}
