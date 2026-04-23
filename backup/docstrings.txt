@@ -1,0 +1,16 @@
+Lista final de docstrings e respetivos scripts
+Aqui estão todas as docstrings que foram definidas ao longo da nossa conversa, para cada ficheiro Python do projeto.
+
+Ficheiro	Docstring
+router.py	"""Router FastAPI – agrupa todas as rotas da aplicação (páginas, APIs, exportações, etc.)."""
+core/atualizador.py	"""Módulo de atualização da base de dados. Processa documentos validados, recalcula estatísticas e mantém o log de processados."""
+core/comparador.py	"""Módulo de comparação entre dados OCR e base de dados. Fornece funções para comparar descrições, dimensões, vendedores e modelos, buscar artigos similares e calcular alertas de preço."""
+core/digitalizacao.py	"""Extracção e parsing de PDFs de facturas. Fornece funções para extrair texto, número do documento, data, tabela de itens, e para fazer o parsing completo de uma factura a partir de um ficheiro PDF."""
+core/geometry.py	"""Cálculo de geometria e estatísticas de modelos FEFCO. Fornece funções para calcular espessura de cartão (CAL), carregar modelos, avaliar expressões de parâmetros e computar áreas e percentagens de utilização de papel."""
+core/models.py	"""Modelos de dados Pydantic para documentos, itens e dimensões. Define as estruturas base usadas em toda a aplicação."""
+core/repositorio.py	"""Repositório de dados – operações de leitura/escrita sobre artigos, documentos, dicionários e catálogo. Gere ficheiros JSON e logs de processamento."""
+core/utils.py	"""Funções utilitárias: normalização de strings (acentos), formatação de números e interpretação de códigos de cartão canelado."""
+core/validacao.py	"""Lógica de validação de itens de fatura. Inclui preparação de sugestões (via OCR ou BD), gestão de rascunhos e propagação de validações entre itens com o mesmo código."""
+settings.py	"""Configuração de caminhos e diretórios da aplicação."""
+file_bundler.py	"""Utilitário para empacotar ficheiros de código num único bundle."""
+gerar_estrutura.py	"""Gera um relatório da estrutura de diretórios do projeto."""
